@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/jam-background.jpg-6e1a9c5324e8ff5282c9123ba9582718.stex"
+path="res://.import/JamLogo.png-c7a6ee2fdd8e3dcb41bef0bcbd6b092b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/splash_screen/jam-background.jpg"
-dest_files=[ "res://.import/jam-background.jpg-6e1a9c5324e8ff5282c9123ba9582718.stex" ]
+source_file="res://scenes/splash_screen/JamLogo.png"
+dest_files=[ "res://.import/JamLogo.png-c7a6ee2fdd8e3dcb41bef0bcbd6b092b.stex" ]
 
 [params]
 
@@ -30,5 +30,5 @@ process/HDR_as_SRGB=false
 process/invert_color=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0
