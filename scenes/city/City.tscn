@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://objects/street/Street.tscn" type="PackedScene" id=1]
+
+[node name="City" type="Node2D"]
+position = Vector2( 16.4814, 2.99661 )
+
+[node name="Street1" parent="." instance=ExtResource( 1 )]
+position = Vector2( 66.1986, 48.8169 )
+points = PoolVector2Array( 3.06152, 8.68286, 232.93, 8.67589 )
+
+[node name="Street2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 352.453, 65.1028 )
+points = PoolVector2Array( -1.66411, -0.865036, -1.58374, 137.481 )
+
+[node name="Street3" parent="." instance=ExtResource( 1 )]
+points = PoolVector2Array( 316.073, 199.216, 89.8969, 199.216 )
+
+[node name="Street4" parent="." instance=ExtResource( 1 )]
+points = PoolVector2Array( 65.2027, 198.094, 65.2027, 62.2757 )

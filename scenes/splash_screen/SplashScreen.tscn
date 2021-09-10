@@ -39,8 +39,7 @@ script = ExtResource( 2 )
 anims/SplashAnimation = SubResource( 1 )
 
 [node name="Background" type="Sprite" parent="AnimationPlayer"]
-position = Vector2( -1500, 0 )
-scale = Vector2( 1.1, 1.1 )
+scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 1 )
 centered = false
 
