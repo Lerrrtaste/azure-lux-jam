@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://objects/street/Street.tscn" type="PackedScene" id=1]
+
+[node name="City" type="Node2D"]
+
+[node name="Street1" parent="." instance=ExtResource( 1 )]
+position = Vector2( 74.9003, 48.8169 )
+points = PoolVector2Array( 3.06152, 8.68286, 478.603, 11.6258 )
+
+[node name="Street2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 369.443, 77.3732 )
+points = PoolVector2Array( 190.667, -6.54778, 190.667, 108.605 )
+
+[node name="Street3" parent="." instance=ExtResource( 1 )]
+points = PoolVector2Array( 543.12, 197.305, 364.785, 197.986 )
+
+[node name="Street4" parent="." instance=ExtResource( 1 )]
+points = PoolVector2Array( 65.2027, 198.094, 65.2027, 62.2757 )
+
+[node name="Street5" parent="." instance=ExtResource( 1 )]
+position = Vector2( 495.641, 137.806 )
+points = PoolVector2Array( 65.2027, 198.094, 65.2027, 62.2757 )
+
+[node name="Street6" parent="." instance=ExtResource( 1 )]
+position = Vector2( 268.06, 139.693 )
+points = PoolVector2Array( 88.1667, 70.6741, 87.0443, 190.778 )
+
+[node name="Street7" parent="." instance=ExtResource( 1 )]
+position = Vector2( 495.534, 141.581 )
+points = PoolVector2Array( 51.3107, 197.916, -136.412, 196.098 )
+
+[node name="Street8" parent="." instance=ExtResource( 1 )]
+position = Vector2( -1.88782, 135.918 )
+points = PoolVector2Array( 65.2027, 198.094, 66.2746, 67.1536 )
+
+[node name="Street9" parent="." instance=ExtResource( 1 )]
+position = Vector2( -235.969, 0 )
+points = PoolVector2Array( 586.022, 198.582, 316.07, 198.582 )
