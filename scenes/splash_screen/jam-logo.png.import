@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/jam-logo.png-869aef400fd0c0cd1f287b57a8067ba1.stex"
+path="res://.import/jam-logo.png-ba1b9a33ebabac33bc9e124a6b6f0638.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/splash-screen/jam-logo.png"
-dest_files=[ "res://.import/jam-logo.png-869aef400fd0c0cd1f287b57a8067ba1.stex" ]
+source_file="res://scenes/splash_screen/jam-logo.png"
+dest_files=[ "res://.import/jam-logo.png-ba1b9a33ebabac33bc9e124a6b6f0638.stex" ]
 
 [params]
 

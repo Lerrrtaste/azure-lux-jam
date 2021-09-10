@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/jam-background.jpg-1b24216912fc7c8bf776294856d34f0b.stex"
+path="res://.import/jam-background.jpg-6e1a9c5324e8ff5282c9123ba9582718.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/splash-screen/jam-background.jpg"
-dest_files=[ "res://.import/jam-background.jpg-1b24216912fc7c8bf776294856d34f0b.stex" ]
+source_file="res://scenes/splash_screen/jam-background.jpg"
+dest_files=[ "res://.import/jam-background.jpg-6e1a9c5324e8ff5282c9123ba9582718.stex" ]
 
 [params]
 
