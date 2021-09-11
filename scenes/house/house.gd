@@ -30,7 +30,7 @@ export(directions) var direction_collision: int = 0
 func _ready():
 	marker.visible=false
 	#set position according to editor position
-<<<<<<< HEAD
+
 	match direction_collision :
 		directions.LEFT:
 			area.position.x=-24
@@ -44,7 +44,7 @@ func _ready():
 		directions.DOWN:
 			area.position.y=24
 			icon.rotate(-1.5708)
->>>>>>> 5fce755ebe4f9db48a2f8a1e726a7fd654b30e09
+
 
 
 # set unset marker functions
