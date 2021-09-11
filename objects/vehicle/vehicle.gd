@@ -1,18 +1,34 @@
 extends Node2D
 
-var street_node:StreetClass #aktuelle street
-var street_position := 0.0 #distanz von a (bzw b bei reversed) 
-var reversed := false #wenn true von b->a
-var rollover_distance := 0.0 #verbleibende distanz nach end_of_street; mitzunehmen auf naechste straße
+class_name VehicleClass
+
+enum Directions {
+	NONE = -1,
+	LEFT,
+	RIGHT,
+	UP,
+	DOWN
+}
+export(Directions) var direction_current:int = Directions.UP #starting direction
+#var direction_next:int = Directions.NONE # TODO needed for the player node only
+
+var target_position := Vector2()
+var rollover_distance := 0.0 #distance remaining for target switch
 
 export(int) var speed_base = 100 #fuer generelles balancing
 var speed_modifier := 1.0 #wird von konkretem fahrer objekt veraendert (fuer einfluss von items, gegnerstaerka etc)
-var moving := true
+var moving := false
 
-signal end_reached(left_available,straigt_available, right_available)
+signal end_reached
+signal request_new_target(current_pos,turn_vector)
 
 func _ready():
+	set_process(false) #not doing anything until city registers it
 	pass # Replace with function body.
+
+#called by city after connecting required signals
+func start():
+	set_process(true)
 
 func _process(delta:float)->void:
 	#calculate how far to move this step
@@ -22,17 +38,20 @@ func _process(delta:float)->void:
 		_move_along(step_distance)
 
 
-func _move_along(distance:float)->void:
-	#calculate new position
-	var new_street_position = street_position + distance
+func _move_along(move_distance:float)->void:
+	#reached target this step?
+	var distance_to_target := position.distance_to(target_position)
 	
-	#reached end of street?
-	if new_street_position > street_node.get_street_length():
-		_end_reached(new_street_position - street_node.get_street_length())
-	else:
-		#move along street
-		street_position += distance
+	if  distance_to_target < move_distance:
+		_end_reached(move_distance-distance_to_target)
+		move_distance = distance_to_target
 	
+	#calculate movement
+	var movement := _direction_to_vector(direction_current)
+	movement = movement.normalized() * move_distance
+	
+	#apply movement
+	position += movement
 
 
 func _end_reached(leftover_distance:float)->void:
@@ -42,6 +61,34 @@ func _end_reached(leftover_distance:float)->void:
 	moving = false
 	emit_signal("end_reached")
 
+#simply convert direction enum to unit vector
+func _direction_to_vector(direction:int)->Vector2:
+	var ret := Vector2()
+	
+	match direction_current: #apply direction
+		Directions.NONE:
+			pass
+		Directions.LEFT:
+			ret.x = -1
+		Directions.RIGHT:
+			ret.x = 1
+		Directions.UP:
+			ret.y = -1
+		Directions.DOWN:
+			ret.y = 1
+	
+	return ret.normalized()
 
-func make_turn(next_street:Node)->bool:
-	return false
+
+#called by player or enemy ai after end_reached
+func make_turn(next_direction:int)->bool:
+	var turn_vector := _direction_to_vector(next_direction)
+	emit_signal("request_new_target",position,turn_vector)
+	
+	return true
+
+
+#called by city after request_new_target
+func set_new_target(target:Vector2)->void:
+	moving = true
+	

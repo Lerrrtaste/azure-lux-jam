@@ -18,10 +18,16 @@ _global_script_classes=[ {
 "class": "StreetClass",
 "language": "GDScript",
 "path": "res://objects/street/street.gd"
+}, {
+"base": "Node2D",
+"class": "VehicleClass",
+"language": "GDScript",
+"path": "res://objects/vehicle/vehicle.gd"
 } ]
 _global_script_class_icons={
 "GitAPI": "",
-"StreetClass": ""
+"StreetClass": "",
+"VehicleClass": ""
 }
 
 [application]
