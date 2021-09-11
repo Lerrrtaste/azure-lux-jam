@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://house.gd" type="Script" id=1]
+[ext_resource path="res://scenes/house/haus-alt.png" type="Texture" id=2]
+
+[node name="House" type="Node2D"]
+position = Vector2( 73.4173, 55.9559 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="targetMarker" type="Sprite" parent="."]
+visible = false
+
+[node name="main" type="Sprite" parent="."]
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 2 )
