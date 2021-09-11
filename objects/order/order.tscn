@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://objects/order/order.gd" type="Script" id=1]
+[ext_resource path="res://objects/order/pizza-good.png" type="Texture" id=2]
+
+[node name="order" type="Node2D"]
+position = Vector2( 76.3674, 48.7903 )
+script = ExtResource( 1 )
+
+[node name="PizzaLogo" type="Sprite" parent="."]
+position = Vector2( -76.086, -48.7217 )
+texture = ExtResource( 2 )

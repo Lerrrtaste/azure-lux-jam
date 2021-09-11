@@ -6,7 +6,9 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 12, 12 )
 
-[node name="House" type="Node2D"]
+[node name="House" type="Node2D" groups=[
+"houses",
+]]
 script = ExtResource( 1 )
 direction_collision = 2
 
