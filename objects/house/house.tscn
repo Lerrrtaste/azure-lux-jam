@@ -7,7 +7,6 @@
 extents = Vector2( 12, 12 )
 
 [node name="House" type="Node2D"]
-position = Vector2( 137.886, 46.4981 )
 script = ExtResource( 1 )
 direction_collision = 2
 
