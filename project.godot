@@ -42,6 +42,10 @@ config/name="AzureLuxJam"
 run/main_scene="res://scenes/game/Game.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+g="*res://global.gd"
+
 [display]
 
 window/size/width=1280

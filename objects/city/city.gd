@@ -14,7 +14,6 @@ func _spawn_buildings()->void:
 	#pizzeria
 	pizzeria.position = map_to_world(world_to_map(pos_pizzeria.position))+cell_size
 	
-	
 	#houses
 	for i in get_used_cells():
 		var cell_id  = get_cellv(i)
