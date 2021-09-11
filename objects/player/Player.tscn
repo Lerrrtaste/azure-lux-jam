@@ -16,6 +16,7 @@ script = ExtResource( 1 )
 texture = ExtResource( 3 )
 
 [node name="Area2D" type="Area2D" parent="."]
+monitoring = false
 collision_layer = 2
 collision_mask = 0
 

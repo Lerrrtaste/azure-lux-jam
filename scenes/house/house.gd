@@ -1,5 +1,6 @@
 extends Node2D
 
+class_name HouseClass
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -28,7 +29,7 @@ export(directions) var direction_collision: int = 0
 func _ready():
 	marker.visible=false
 	#set position according to editor position
-	match direction_collision :
+	match direction_collision:
 		0:
 			Area.move_local_x(-7)
 		1:
@@ -67,6 +68,9 @@ signal playerEntered
 #func _process(delta):
 #	pass
 
+#Called by city to (before entering tree / before _ready() is called) 
+func set_direction(val:int)->void:
+	direction_collision = val
 
 func _on_Area2D_area_entered(area):
 	if isTargetOfOrder :

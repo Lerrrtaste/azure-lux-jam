@@ -1,8 +1,18 @@
 extends TileMap
 
+onready var pos_player_spawn = $PosPlayerSpawn
 
 func _ready():
-	pass # Replace with function body.
+	_spawn_buildings()
+
+func _spawn_buildings()->void:
+	for i in get_used_cells():
+		var cell_id  = get_cellv(i)
+		match tile_set.tile_get_name(cell_id):
+			"house":
+				var inst = HouseClass.new()
+				inst.set_direction(randi()%4)
+				add_child(inst)
 
 #required signals for driving
 func register_vehicle(vehicle:VehicleClass)->void:
@@ -24,3 +34,7 @@ func _on_Vehicle_request_new_target(vehicle:VehicleClass, turn_vector:Vector2)->
 	
 	var target_position := map_to_world(cell_requested_coord) + cell_size/2
 	vehicle.allow_distance(cell_size.x)
+
+func _get_player_spawn()->Vector2:
+	var cell := world_to_map(pos_player_spawn)
+	return map_to_world(cell)+cell_size/2
