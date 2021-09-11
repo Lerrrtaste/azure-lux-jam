@@ -14,11 +14,6 @@ _global_script_classes=[ {
 "language": "NativeScript",
 "path": "res://git_api.gdns"
 }, {
-"base": "Node2D",
-"class": "HouseClass",
-"language": "GDScript",
-"path": "res://scenes/house/house.gd"
-}, {
 "base": "Line2D",
 "class": "StreetClass",
 "language": "GDScript",
@@ -31,7 +26,6 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "GitAPI": "",
-"HouseClass": "",
 "StreetClass": "",
 "VehicleClass": ""
 }

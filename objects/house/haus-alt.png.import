@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/haus-alt.png-fec8f5699ec0f81892e0ab52eeefb575.stex"
+path="res://.import/haus-alt.png-03d0284abbb329bcf163f741f54b8a4a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/house/haus-alt.png"
-dest_files=[ "res://.import/haus-alt.png-fec8f5699ec0f81892e0ab52eeefb575.stex" ]
+source_file="res://objects/house/haus-alt.png"
+dest_files=[ "res://.import/haus-alt.png-03d0284abbb329bcf163f741f54b8a4a.stex" ]
 
 [params]
 

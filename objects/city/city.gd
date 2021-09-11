@@ -1,5 +1,7 @@
 extends TileMap
 
+
+const House = preload("res://objects/house/house.tscn")
 onready var pos_player_spawn = $PosPlayerSpawn
 
 func _ready():
@@ -10,7 +12,8 @@ func _spawn_buildings()->void:
 		var cell_id  = get_cellv(i)
 		match tile_set.tile_get_name(cell_id):
 			"house":
-				var inst = HouseClass.new()
+				var inst = House.instance()
+				inst.position = map_to_world(i)
 				inst.set_direction(randi()%4)
 				add_child(inst)
 
