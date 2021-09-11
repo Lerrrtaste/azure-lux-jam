@@ -1,11 +1,13 @@
 extends Node2D
 
-var street_node:StreetClass
-var street_position := 0.0
-var reversed := false
+var street_node:StreetClass #aktuelle street
+var street_position := 0.0 #distanz von a (bzw b bei reversed) 
+var reversed := false #wenn true von b->a
+var rollover_distance := 0.0 #verbleibende distanz nach end_of_street; mitzunehmen auf naechste straße
 
-export(int) var speed_base = 100
-var speed_modifier := 1.0
+export(int) var speed_base = 100 #fuer generelles balancing
+var speed_modifier := 1.0 #wird von konkretem fahrer objekt veraendert (fuer einfluss von items, gegnerstaerka etc)
+
 
 signal end_reached(left_available,straigt_available, right_available)
 
