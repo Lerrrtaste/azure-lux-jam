@@ -44,20 +44,6 @@ func _ready():
 		directions.DOWN:
 			area.position.y=24
 			icon.rotate(-1.5708)
-=======
-	match direction_collision:
-		0:
-			Area.move_local_x(-7)
-		1:
-			Area.move_local_x(7)
-		2:
-			Area.rotate(1.5708)
-			Area.move_local_y(0)
-			Area.move_local_x(-12)
-		3:
-			Area.rotate(1.5708)
-			Area.move_local_y(0)
-			Area.move_local_x(12)
 >>>>>>> 5fce755ebe4f9db48a2f8a1e726a7fd654b30e09
 
 
