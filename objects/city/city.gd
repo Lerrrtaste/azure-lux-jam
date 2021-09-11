@@ -13,8 +13,24 @@ func _spawn_buildings()->void:
 		match tile_set.tile_get_name(cell_id):
 			"house":
 				var inst = House.instance()
+				
+				var street_direction = -1
+				var cell_id_street := tile_set.find_tile_by_name("street")
+				if get_cellv(i+Vector2(0,-1)) == cell_id_street:
+					street_direction = inst.directions.UP
+				if get_cellv(i+Vector2(-1,0)) == cell_id_street:
+					street_direction = inst.directions.LEFT
+				if get_cellv(i+Vector2(1,0)) == cell_id_street:
+					street_direction = inst.directions.RIGHT
+				if get_cellv(i+Vector2(0,1)) == cell_id_street:
+					street_direction = inst.directions.DOWN
+				
+				if street_direction == -1:
+					printerr(inst.name + " konnte kein Strasse finden!")
+					continue
+				
 				inst.position = map_to_world(i) + cell_size/2
-				inst.set_direction(randi()%4)
+				inst.set_direction(street_direction)
 				add_child(inst)
 
 #required signals for driving
