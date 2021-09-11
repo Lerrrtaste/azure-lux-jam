@@ -4,18 +4,17 @@
 [ext_resource path="res://scenes/house/haus-alt.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 23.3432, 10.5619 )
+extents = Vector2( 12, 12 )
 
 [node name="House" type="Node2D"]
 position = Vector2( 137.886, 46.4981 )
 script = ExtResource( 1 )
-direction_collision = 3
+direction_collision = 2
 
 [node name="targetMarker" type="Sprite" parent="."]
 visible = false
 
 [node name="main" type="Sprite" parent="."]
-scale = Vector2( 0.07, 0.07 )
 texture = ExtResource( 2 )
 
 [node name="Area2D" type="Area2D" parent="."]

@@ -4,7 +4,8 @@ extends Node2D
 # Declare member variables here. Examples:
 # var a = 2
 onready var marker = $targetMarker
-onready var Area = $Area2D/CollisionShape2D
+onready var area = $Area2D
+onready var icon = $main
 var isTargetOfOrder=false
 
 # var b = "text"
@@ -29,18 +30,18 @@ func _ready():
 	marker.visible=false
 	#set position according to editor position
 	match direction_collision :
-		0:
-			Area.move_local_x(-7)
-		1:
-			Area.move_local_x(7)
-		2:
-			Area.rotate(1.5708)
-			Area.move_local_y(0)
-			Area.move_local_x(-12)
-		3:
-			Area.rotate(1.5708)
-			Area.move_local_y(0)
-			Area.move_local_x(12)
+		directions.LEFT:
+			area.position.x=-24
+			icon.rotate(0)
+		directions.RIGHT:
+			area.position.x=24
+			icon.set_flip_h(true)
+		directions.UP:
+			icon.rotate(1.5708)
+			area.position.y=-24
+		directions.DOWN:
+			area.position.y=24
+			icon.rotate(-1.5708)
 
 
 # set unset marker functions
