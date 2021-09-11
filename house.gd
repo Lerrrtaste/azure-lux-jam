@@ -17,10 +17,18 @@ func _ready():
 
 
 func setTarget():
+	if isTargetOfOrder :
+		print("waring house is already target")
+	else:
+		print("setting house to target")
 	marker.visible=true
 	isTargetOfOrder=true
 	
 func removeTarget():
+	if isTargetOfOrder :
+		print("remove the house as target")
+	else:
+		print("warning house already isnt target")
 	marker.visible=false
 	isTargetOfOrder=false
 

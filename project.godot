@@ -33,6 +33,13 @@ config/icon="res://icon.png"
 
 singletons=[ "res://git_api.gdnlib" ]
 
+[layer_names]
+
+2d_physics/layer_1="house"
+2d_physics/layer_2="player"
+2d_physics/layer_3="zombie"
+2d_physics/layer_4="pizzeria"
+
 [physics]
 
 common/enable_pause_aware_picking=true
