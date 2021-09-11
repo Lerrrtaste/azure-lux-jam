@@ -39,7 +39,7 @@ func register_vehicle(vehicle:VehicleClass)->void:
 	print(vehicle, ": Registered in city. Can now drive and navigate.")
 
 func _on_Vehicle_request_new_target(vehicle:VehicleClass, turn_vector:Vector2)->void:
-	var cell_current := world_to_map(vehicle.global_position)
+	var cell_current := world_to_map(vehicle.global_position-self.position)
 	var cell_requested_coord := cell_current + turn_vector.normalized()
 	var cell_requested_id := get_cellv(cell_requested_coord)
 
@@ -55,5 +55,5 @@ func _on_Vehicle_request_new_target(vehicle:VehicleClass, turn_vector:Vector2)->
 	vehicle.allow_distance(cell_size.x)
 
 func _get_player_spawn()->Vector2:
-	var cell := world_to_map(pos_player_spawn)
+	var cell := world_to_map(pos_player_spawn.position)
 	return map_to_world(cell)+cell_size/2

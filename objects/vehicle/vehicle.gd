@@ -70,7 +70,7 @@ func _move_along(move_distance:float)->void:
 
 
 func _end_reached()->void:
-	print("end reached")
+	#print("end reached")
 	moving = false
 	emit_signal("end_reached")
 
