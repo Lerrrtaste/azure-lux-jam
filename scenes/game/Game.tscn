@@ -14,3 +14,17 @@ __meta__ = {
 position = Vector2( 269.858, 106.356 )
 
 [node name="Player" parent="City" instance=ExtResource( 2 )]
+
+[node name="LblScore" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LblMoney" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
+__meta__ = {
+"_edit_use_anchors_": false
+}

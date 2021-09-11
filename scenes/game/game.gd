@@ -1,14 +1,22 @@
 extends Control
 
-var score := 0
-var money := 0
-
 onready var city := $City
 onready var player := $City/Player
+
+#var Order = preload("res://objects/order/order.tscn")
+
+export(int) var max_active_orders := 1
+var active_orders := 0
+var score := 0
+var money := 0
 
 func _ready():
 	player.position = city._get_player_spawn()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+
+func _create_order()->void:
+	pass
+
+func _on_Order_delivered(delivered_to:House, spoiler):
+	pass
+	

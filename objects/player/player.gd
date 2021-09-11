@@ -2,6 +2,9 @@ extends Node2D
 
 onready var vehicle = $Vehicle
 
+var hp := 100
+var lives := 3
+
 var next_turn := Vector2()
 
 # Called when the node enters the scene tree for the first time.
