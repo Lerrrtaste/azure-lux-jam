@@ -1,9 +1,12 @@
 extends Node2D
 
 onready var vehicle = $Vehicle
+onready var area_body = $AreaBody
 
 var hp := 100
 var lives := 3
+
+var current_slowdown := 0
 
 var next_turn := Vector2()
 
@@ -14,17 +17,29 @@ func _ready():
 	vehicle.connect("moving", self, "_on_Vehicle_moving")
 	vehicle.start()
 	#vehicle.make_turn(Vector2(0,0))
+	
+	area_body.connect("area_entered",self,"_on_AreaBody_area_entered")
 
+
+func _process(delta):
+	vehicle.speed_modifier += (1.0 - vehicle.speed_modifier)/750
+	#print(vehicle.speed_modifier)
 
 func _on_Vehicle_end_reached()->void:
 	if vehicle.make_turn(next_turn):
 		next_turn = Vector2() #wait for new turn signal
 	else:
 		vehicle.make_turn(Vector2()) #player turn not possible (yet) keep straight or stop
-	
+
+
 
 func _on_Vehicle_moving(movement:Vector2)->void:
 	position += movement
+
+
+func recieve_slowdown(slowdown_percent:float)->void:
+	vehicle.speed_modifier -= slowdown_percent
+
 
 func _unhandled_key_input(event):
 	if !event.pressed:
@@ -44,3 +59,6 @@ func _unhandled_key_input(event):
 	
 	if !vehicle.moving:
 		vehicle.make_turn(next_turn)
+	
+	if event.scancode == KEY_SPACE && vehicle.speed_modifier < 1.0:
+		vehicle.speed_modifier += 0.025

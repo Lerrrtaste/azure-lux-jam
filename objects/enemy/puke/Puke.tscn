@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://objects/enemy/EnemyBase.tscn" type="PackedScene" id=1]
+[ext_resource path="res://objects/enemy/puke/puke_placeholder.png" type="Texture" id=2]
+[ext_resource path="res://objects/enemy/puke/puke.gd" type="Script" id=3]
+
+[node name="Puke" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="EnemyBase" parent="." instance=ExtResource( 1 )]
+player_slowdown_percent = 0.5
+damage_impact = 1
+damage_time = 0
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="TimerDespawn" type="Timer" parent="."]

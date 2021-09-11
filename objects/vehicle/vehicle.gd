@@ -19,7 +19,7 @@ var allowed_distance := 0.0
 var rollover_distance := 0.0 #distance remaining for target switch
 
 export(int) var speed_base = 200 #fuer generelles balancing
-var speed_modifier := 1.0 #wird von konkretem fahrer objekt veraendert (fuer einfluss von items, gegnerstaerka etc)
+var speed_modifier := 1.0 setget set_speed_modifier #wird von konkretem fahrer objekt veraendert (fuer einfluss von items, gegnerstaerka etc)
 var moving := false
 
 
@@ -138,3 +138,7 @@ func allow_distance(distance:float)->void:
 	moving = true
 	allowed_distance = distance
 	#_move_along(rollover_distance)
+
+
+func set_speed_modifier(val:float)->void:
+	speed_modifier = max(0.1,min(1.0,val)) 

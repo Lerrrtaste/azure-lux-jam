@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://objects/enemy/EnemyBase.tscn" type="PackedScene" id=1]
+[ext_resource path="res://objects/enemy/zombie/zombie_placeholder.png" type="Texture" id=2]
+
+[node name="Zombie" type="Node2D"]
+
+[node name="EnemyBase" parent="." instance=ExtResource( 1 )]
+moving = true
+player_slowdown_percent = 0.2
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )

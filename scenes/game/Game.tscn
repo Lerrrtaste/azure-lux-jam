@@ -1,30 +1,62 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://objects/city/City.tscn" type="PackedScene" id=1]
 [ext_resource path="res://objects/player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/game/game.gd" type="Script" id=3]
+[ext_resource path="res://scenes/game/puke_screeneffect_placeholder.png" type="Texture" id=5]
 
-[node name="Game" type="Control"]
+[node name="Game" type="Node2D"]
 script = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="City" parent="." instance=ExtResource( 1 )]
 position = Vector2( 269.858, 106.356 )
 
 [node name="Player" parent="City" instance=ExtResource( 2 )]
+position = Vector2( 68.9535, 102.589 )
 
-[node name="LblScore" type="Label" parent="."]
+[node name="SprPukeEffect" type="Sprite" parent="."]
+position = Vector2( 640, -360 )
+scale = Vector2( 10, 10 )
+texture = ExtResource( 5 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 margin_right = 40.0
-margin_bottom = 14.0
+margin_bottom = 40.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LblMoney" type="Label" parent="."]
-margin_right = 40.0
+[node name="LblSpeed" type="Label" parent="VBoxContainer"]
+margin_right = 43.0
 margin_bottom = 14.0
+text = "Hp"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LblHp" type="Label" parent="VBoxContainer"]
+margin_top = 18.0
+margin_right = 43.0
+margin_bottom = 32.0
+text = "Hp"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LblScore" type="Label" parent="VBoxContainer"]
+margin_top = 36.0
+margin_right = 43.0
+margin_bottom = 50.0
+text = "Score"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LblMoney" type="Label" parent="VBoxContainer"]
+margin_top = 54.0
+margin_right = 43.0
+margin_bottom = 68.0
+text = "Money"
 __meta__ = {
 "_edit_use_anchors_": false
 }

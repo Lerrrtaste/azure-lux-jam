@@ -57,3 +57,7 @@ func _on_Vehicle_request_new_target(vehicle:VehicleClass, turn_vector:Vector2)->
 func _get_player_spawn()->Vector2:
 	var cell := world_to_map(pos_player_spawn.position)
 	return map_to_world(cell)+cell_size/2
+
+func get_cell_center_pos(approx_pos:Vector2)->Vector2:
+	var cell := world_to_map(approx_pos)
+	return map_to_world(cell)+cell_size/2
