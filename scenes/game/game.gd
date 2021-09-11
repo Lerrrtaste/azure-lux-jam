@@ -30,6 +30,7 @@ func _process(delta):
 	
 	#update ui labels
 	lbl_speed.text = "Speed: %s"%(player.vehicle.speed_base * player.vehicle.speed_modifier)
+	lbl_hp.text = "HP: %s"%player.hp
 
 func _create_order()->void:
 	var inst = Order.instance()

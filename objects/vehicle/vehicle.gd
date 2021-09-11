@@ -117,13 +117,40 @@ func make_turn(turn_vector:Vector2)->bool:
 	if moving:
 		return false
 	
+	#player input
+	if turn_vector != Vector2():
+		emit_signal("request_new_target",self,turn_vector)
+	
+	#straigt
 	if turn_vector == Vector2():
 		turn_vector = direction_to_vector(direction_current)
-	else:
-		pass#direction_current = turnvec_to_direction(turn_vector)
-	
-	#var turn_vector := direction_to_vector(next_direction)
-	emit_signal("request_new_target",self,turn_vector)
+		emit_signal("request_new_target",self,turn_vector)
+#
+#		#straigt not possible
+#		if !moving:
+#			#try right
+#			turn_vector = direction_to_vector(direction_current)
+#			turn_vector.rotated(deg2rad(90))
+#			emit_signal("request_new_target",self,turn_vector)
+#
+#			#right possible
+#			if moving:
+#				turn_vector = direction_to_vector(direction_current)
+#				turn_vector.rotated(deg2rad(-180))
+#				emit_signal("request_new_target",self,turn_vector)
+#
+#				#left possible -> two options stand still
+#				if moving:
+#					moving = false # more than one possibility!!! -> stand still
+#				else:#only right possible
+#					turn_vector = direction_to_vector(direction_current)
+#					turn_vector.rotated(deg2rad(180))
+#					emit_signal("request_new_target",self,turn_vector)
+#			else:
+#				#turn left
+#				turn_vector = direction_to_vector(direction_current)
+#				turn_vector.rotated(deg2rad(--90))
+#				emit_signal("request_new_target",self,turn_vector)
 	
 	if !moving: #should be true if it succeeded
 		return false

@@ -3,7 +3,7 @@ extends Node2D
 onready var vehicle = $Vehicle
 onready var area_body = $AreaBody
 
-var hp := 100
+export(int) var hp := 10
 var lives := 3
 
 var current_slowdown := 0
@@ -40,6 +40,11 @@ func _on_Vehicle_moving(movement:Vector2)->void:
 func recieve_slowdown(slowdown_percent:float)->void:
 	vehicle.speed_modifier -= slowdown_percent
 
+func recieve_damage(damage:int)->void:
+	print("Player attacked. subtracted %s hp"%damage)
+	hp -= damage
+	if hp <= 0:
+		print("TODO game over")
 
 func _unhandled_key_input(event):
 	if !event.pressed:
