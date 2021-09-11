@@ -13,7 +13,7 @@ func _spawn_buildings()->void:
 		match tile_set.tile_get_name(cell_id):
 			"house":
 				var inst = House.instance()
-				inst.position = map_to_world(i)
+				inst.position = map_to_world(i) + cell_size/2
 				inst.set_direction(randi()%4)
 				add_child(inst)
 
