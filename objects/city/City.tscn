@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://objects/city/city_tileset.tres" type="TileSet" id=1]
+[ext_resource path="res://objects/pizzeria/Pizzeria.tscn" type="PackedScene" id=2]
 [ext_resource path="res://objects/city/city.gd" type="Script" id=3]
 
 [node name="City" type="TileMap" groups=[
@@ -14,3 +15,8 @@ script = ExtResource( 3 )
 
 [node name="PosPlayerSpawn" type="Position2D" parent="."]
 position = Vector2( 394.603, 353.247 )
+
+[node name="Pizzeria" parent="." instance=ExtResource( 2 )]
+
+[node name="PosPizzeria" type="Position2D" parent="."]
+position = Vector2( 420.607, 108.065 )

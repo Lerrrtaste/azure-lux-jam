@@ -6,21 +6,21 @@ extends Node2D
 onready var marker = $marker
 var isPizzaReady=false
 var maxOrdersPicked = 5
-# var b = "text"
+
 func _draw(): #draw the pizza ready marker
-	marker.draw_circle(Vector2(), 50, ColorN("yellow", 0.2))
+	if isPizzaReady:
+		draw_circle(Vector2(), 50, ColorN("yellow", 0.2))
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	marker.visible=false
+	marker.visible=false #no function atm
 
 func notifyNewPizza():
-	isPizzaReady=true;
-	marker.visible=true;
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+	isPizzaReady=true
+	marker.visible=true #no function atm
 
+func _process(delta):
+	update()
 
 func _on_Area2D_area_entered(area):
 	var allOrders = get_tree().get_nodes_in_group("orders")

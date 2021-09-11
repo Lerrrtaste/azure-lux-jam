@@ -13,6 +13,9 @@ var customerHouse
 func _ready():
 	$PizzaLogo.texture=load("res://objects/order/pizza-good.png")
 	
+	for i in get_tree().get_nodes_in_group("City"):
+		if i.pizzeria.has_method("notifyNewPizza"):
+			i.pizzeria.notifyNewPizza()
 
 func _process(delta) :
 	var spoilingLast=spoiling
@@ -28,7 +31,7 @@ func setPickedUp():
 	pickedUp=true
 	var allHouses = get_tree().get_nodes_in_group("houses")
 	customerHouse=allHouses[randi() % allHouses.size()]
-	customerHouse.connect("playerEntered", self, "on_Deliverd")
+	customerHouse.connect("playerEntered", self, "on_Delivered")
 	customerHouse.setTarget()
 
 signal deliveredTo(house,spoiling)

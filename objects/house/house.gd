@@ -13,9 +13,10 @@ var isTargetOfOrder=false
 
 # set marker to display a circle
 func _draw():
-	marker.draw_circle(Vector2(), 24, ColorN("yellow", 0.2))
-	
-	
+	if isTargetOfOrder:
+		draw_circle(Vector2(), 24, ColorN("yellow", 0.2))
+
+
 #to variable set the collision area position
 enum directions {
 	LEFT,
@@ -67,9 +68,10 @@ func removeTarget():
 
 #code handling player entry
 signal playerEntered
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+
+
+func _process(delta):
+	update()
 
 #Called by city to (before entering tree / before _ready() is called) 
 func set_direction(val:int)->void:
@@ -79,6 +81,3 @@ func _on_Area2D_area_entered(area):
 	if isTargetOfOrder :
 		removeTarget()
 		emit_signal("playerEntered")
-		
-
-		

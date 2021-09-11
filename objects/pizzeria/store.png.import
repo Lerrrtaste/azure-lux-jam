@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/store.png-9ce1caf39d603615cbd1096ebbe00acd.stex"
+path="res://.import/store.png-7d92034293a1cdc520a049a23ee7bfa1.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://objects/pizzaria/store.png"
-dest_files=[ "res://.import/store.png-9ce1caf39d603615cbd1096ebbe00acd.stex" ]
+source_file="res://objects/pizzeria/store.png"
+dest_files=[ "res://.import/store.png-7d92034293a1cdc520a049a23ee7bfa1.stex" ]
 
 [params]
 

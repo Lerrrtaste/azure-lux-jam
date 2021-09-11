@@ -2,12 +2,20 @@ extends TileMap
 
 
 const House = preload("res://objects/house/house.tscn")
+
 onready var pos_player_spawn = $PosPlayerSpawn
+onready var pos_pizzeria = $PosPizzeria
+onready var pizzeria = $Pizzeria
 
 func _ready():
 	_spawn_buildings()
 
 func _spawn_buildings()->void:
+	#pizzeria
+	pizzeria.position = map_to_world(world_to_map(pos_pizzeria.position))+cell_size
+	
+	
+	#houses
 	for i in get_used_cells():
 		var cell_id  = get_cellv(i)
 		match tile_set.tile_get_name(cell_id):

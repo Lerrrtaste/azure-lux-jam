@@ -9,8 +9,6 @@ onready var lbl_score = $VBoxContainer/LblScore
 onready var lbl_money = $VBoxContainer/LblMoney
 onready var lbl_speed = $VBoxContainer/LblSpeed
 
-
-
 var Order = preload("res://objects/order/order.tscn")
 var Puke = preload("res://objects/enemy/puke/Puke.tscn")
 
@@ -20,10 +18,11 @@ var money := 0
 
 func _ready():
 	player.position = city._get_player_spawn()
+	
 
 func _process(delta):
 	if get_tree().get_nodes_in_group("orders").size() < max_active_orders:
-		pass#_create_order()
+		_create_order()
 	
 	spr_puke_effect.modulate = ColorN("white",(1.2-player.vehicle.speed_modifier))
 	spr_puke_effect.position.y = -360 + 720*(1.0-player.vehicle.speed_modifier)
@@ -49,6 +48,6 @@ func _on_Order_delivered(delivered_to:House, spoiling_progress:float):
 	#geld popup
 	#punkte popup
 	#gegner spawnen?
-	
+	print("OrderAbgeschlossen. Spoiling progress: %s"%spoiling_progress)
 	pass
 	
