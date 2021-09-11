@@ -27,7 +27,15 @@ _global_script_class_icons={
 [application]
 
 config/name="AzureLuxJam"
+run/main_scene="res://scenes/splash_screen/SplashScreen.tscn"
 config/icon="res://icon.png"
+
+[display]
+
+window/size/width=1280
+window/size/height=720
+window/stretch/mode="viewport"
+window/stretch/aspect="keep"
 
 [gdnative]
 
@@ -39,4 +47,6 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
+quality/intended_usage/framebuffer_allocation=0
+quality/intended_usage/framebuffer_allocation.mobile=0
 environment/default_environment="res://default_env.tres"
