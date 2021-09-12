@@ -1,11 +1,16 @@
 extends Node2D
 
 export(bool) var moving = false
-export(int) var speed_base_offset = -200
-export(float) var player_slowdown_percent = 0.25
-export(int) var damage_impact = 3
-export(float) var attack_cooldown = 0.5
-export(int) var attack_damage = 1
+
+#balancing
+var speed_base_offset = -200 #difference from global "base speed" (hardcoded in vehicle node)
+var player_slowdown_percent = 0.25 #slows player down on first contact
+var damage_impact = 3 #damage on first impact
+var attack_cooldown = 0.5 #seconds between time-based attacks
+var attack_damage = 1 #damage from time based attacks
+var attack_range := 12 #radius for attacking
+var slowdown_range := 6 #radius for slowdown 
+var body_radius := 6 #radius for taking damage
 
 onready var vehicle = $Vehicle
 
