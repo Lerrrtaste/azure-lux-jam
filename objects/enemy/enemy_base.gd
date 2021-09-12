@@ -22,7 +22,7 @@ onready var timer_attack_cooldown = $TimerAttackCooldown
 func _ready():
 	#setup vehicle
 	vehicle.speed_base += speed_base_offset
-	vehicle.connect("end_reached",self,"_on_Vehicle_end_reached")
+	#vehicle.connect("end_reached",self,"_on_Vehicle_end_reached")
 	#vehicle.connect("moving", self, "_on_Vehicle_moving")
 	if can_move: 
 		vehicle.start()
@@ -34,6 +34,7 @@ func _ready():
 	area_attack.connect("area_entered",self,"_on_AreaAttack_area_entered")
 	area_attack.connect("area_exited",self,"_on_AreaAttack_area_exited")
 	timer_attack_cooldown.connect("timeout",self,"_on_TimerAttackCooldown_timeout")
+
 
 func _on_AreaSlowdown_area_entered(area:Area2D)->void:
 	var obj = area.owner

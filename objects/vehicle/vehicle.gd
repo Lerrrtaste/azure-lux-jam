@@ -19,7 +19,7 @@ const FLOAT_PRECISION = 0.01
 var allowed_distance := 0.0
 var rollover_distance := 0.0 #distance remaining for target switch
 
-export(int) var speed_base = 200 #fuer generelles balancing
+var speed_base = 200 #fuer generelles balancing
 var speed_modifier := 1.0 setget set_speed_modifier #wird von konkretem fahrer objekt veraendert (fuer einfluss von items, gegnerstaerka etc)
 var moving := false
 
@@ -30,6 +30,7 @@ signal moving(movement)
 
 
 func _ready():
+	speed_base = g.MOVEMENT_BASE_SPEED
 	set_process(false) #not doing anything until city registers it
 	pass # Replace with function body.
 
