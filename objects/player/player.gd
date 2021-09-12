@@ -18,7 +18,7 @@ func _ready():
 	vehicle.start()
 	#vehicle.make_turn(Vector2(0,0))
 	
-	area_body.connect("area_entered",self,"_on_AreaBody_area_entered")
+	#area_body.connect("area_entered",self,"_on_AreaBody_area_entered")
 
 
 func _process(delta):
