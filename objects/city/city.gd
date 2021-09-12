@@ -42,24 +42,54 @@ func _spawn_buildings()->void:
 
 #required signals for driving
 func register_vehicle(vehicle:VehicleClass)->void:
-	vehicle.connect("request_new_target",self,"_on_Vehicle_request_new_target")
-	print(vehicle, ": Registered in city. Can now drive and navigate.")
+	vehicle.connect("update_possible_directions",self,"_on_Vehicle_update_possible_directions")
+	print(vehicle.name, ": Registered in city. Can now drive and navigate.")
 
-func _on_Vehicle_request_new_target(vehicle:VehicleClass, turn_vector:Vector2)->void:
+
+func _on_Vehicle_update_possible_directions(vehicle:VehicleClass)->void:
+#	var cell_current := world_to_map(vehicle.global_position-self.position)
+#	#var cell_requested_coord := cell_current + turn_vector.normalized()
+#	var cell_requested_id := get_cellv(cell_requested_coord)
+#
+#	if cell_requested_id == INVALID_CELL:
+#		return
+#
+#	var shapes = tile_set.tile_get_shapes(cell_requested_id)
+#	for i in shapes:
+#		if i.has("shape"):
+#			return
+#
+#	var target_position := map_to_world(cell_requested_coord) + cell_size/2
+#	vehicle.allow_distance(cell_size.x)
+
 	var cell_current := world_to_map(vehicle.global_position-self.position)
-	var cell_requested_coord := cell_current + turn_vector.normalized()
-	var cell_requested_id := get_cellv(cell_requested_coord)
-
-	if cell_requested_id == INVALID_CELL:
-		return
+	var ret_possible_directions:Array
 	
-	var shapes = tile_set.tile_get_shapes(cell_requested_id)
-	for i in shapes:
-		if i.has("shape"):
-			return
+	#test all adjacent cells for collision shapes
+	for dir in range(4):
+		var test_turn :=  Vector2()
+		match dir:
+			0: #up
+				test_turn.y = -1
+			1: #right
+				test_turn.x = 1
+			2: #down
+				test_turn.y = 1
+			3: #left
+				test_turn.x = -1
+		
+		var cell_test := cell_current+test_turn
+		var cell_test_id := get_cellv(cell_test)
+		
+		if cell_test_id == INVALID_CELL:
+			continue
+		
+		if tile_set.tile_get_shapes(cell_test_id).empty(): #no collision shape
+			ret_possible_directions.append(test_turn)
 	
-	var target_position := map_to_world(cell_requested_coord) + cell_size/2
-	vehicle.allow_distance(cell_size.x)
+	vehicle.set_possible_directions(ret_possible_directions)
+	
+	
 
 func _get_player_spawn()->Vector2:
 	var cell := world_to_map(pos_player_spawn.position)

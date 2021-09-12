@@ -25,12 +25,11 @@ func _process(delta):
 	vehicle.speed_modifier += (1.0 - vehicle.speed_modifier)/750
 	#print(vehicle.speed_modifier)
 
-func _on_Vehicle_end_reached()->void:
-	if vehicle.make_turn(next_turn):
-		next_turn = Vector2() #wait for new turn signal
+func _on_Vehicle_end_reached(possible_turns)->void:
+	if next_turn.length() > 0 && vehicle.make_turn(next_turn):
+		next_turn = Vector2() #clear next turn cache
 	else:
-		vehicle.make_turn(Vector2()) #player turn not possible (yet) keep straight or stop
-
+		vehicle.make_turn(Vector2()) #player turn not possible, auto turn behaviour
 
 
 func _on_Vehicle_moving(movement:Vector2)->void:
@@ -39,6 +38,7 @@ func _on_Vehicle_moving(movement:Vector2)->void:
 
 func recieve_slowdown(slowdown_percent:float)->void:
 	vehicle.speed_modifier -= slowdown_percent
+
 
 func recieve_damage(damage:int)->void:
 	print("Player attacked. subtracted %s hp"%damage)
