@@ -35,8 +35,8 @@ func _process(delta):
 	
 	
 	#### update puke screen effect ####
-	spr_puke_effect.modulate = ColorN("white",(1.2-player.vehicle.speed_modifier)) #TODO change
-	spr_puke_effect.position.y = -360 + 720*(1.0-player.vehicle.speed_modifier)
+	#spr_puke_effect.modulate = ColorN("white",(1.2-player.vehicle.speed_modifier)) #TODO change
+	#spr_puke_effect.position.y = -360 + 720*(1.0-player.vehicle.speed_modifier)
 	
 	
 	#### update ui text ####
@@ -90,18 +90,14 @@ func _on_Order_delivered(order:Node, delivered_to:House, secs:float):
 	
 	var money_bonus := randi()%g.ORDER_REWARD_MONEY_RANDOM
 	
-	#order bad
-	if secs > g.ORDER_ZOMBIE_THRESHOLD_START:
+	
+	if secs > g.ORDER_ZOMBIE_THRESHOLD_START: #order bad
 		_create_zombie(position_street)
 		_award_money(position_house,g.ORDER_REWARD_MONEY_BAD)
 		_award_score(position_street,g.score_reward)
-		
-	
-	#order medium
-	if secs > g.ORDER_PUKE_THRESHOLD:
+	elif secs > g.ORDER_PUKE_THRESHOLD: #order medium
 		_create_puke(position_street)
-	
-	if secs < g.ORDER_PUKE_THRESHOLD:
+	else: #good order
 		combo += 1
 	
 	#order good

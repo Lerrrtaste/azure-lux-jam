@@ -61,8 +61,8 @@ func _unhandled_key_input(event):
 			next_turn = (Vector2(1,0)) 
 	
 	
-	if !vehicle.moving:
-		vehicle.make_turn(next_turn)
+#	if !vehicle.moving:
+#		vehicle.make_turn(next_turn)
 	
 	if event.scancode == KEY_SPACE && vehicle.speed_modifier < 1.0:
 		vehicle.speed_modifier += 0.025
