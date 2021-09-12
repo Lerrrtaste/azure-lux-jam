@@ -85,20 +85,29 @@ func _on_Order_delivered(order:Node, delivered_to:House, secs:float):
 	
 	var score_reward := 0
 	score_reward += g.ORDER_REWARD_POINTS_DELIVERED
-	score_reward += combo * g.ORDER_REWARD_POINTS_COMBO
 	score_reward += randi()%g.ORDER_REWARD_POINTS_RANDOM
 	
 	var money_bonus := randi()%g.ORDER_REWARD_MONEY_RANDOM
 	
-	
 	if secs > g.ORDER_ZOMBIE_THRESHOLD_START: #order bad
+		combo = 0
+		
 		_create_zombie(position_street)
 		_award_money(position_house,g.ORDER_REWARD_MONEY_BAD)
-		_award_score(position_street,g.score_reward)
+		_award_score(position_street,score_reward)
 	elif secs > g.ORDER_PUKE_THRESHOLD: #order medium
+		combo = 0
+		
 		_create_puke(position_street)
+		_award_money(position_house,g.ORDER_REWARD_MONEY_MEDIUM)
+		_award_score(position_street,score_reward)
 	else: #good order
+		score_reward += combo * g.ORDER_REWARD_POINTS_COMBO
+		score_reward += g.ORDER_REWARD_POINTS_INTIME
 		combo += 1
+		_award_score(position_street,score_reward)
+		_award_money(position_house,g.ORDER_REWARD_MONEY_GOOD)
+		
 	
 	#order good
 	

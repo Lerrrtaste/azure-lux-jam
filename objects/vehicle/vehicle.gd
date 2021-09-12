@@ -99,7 +99,7 @@ func make_turn(turn_vector:Vector2)->bool:
 		if possible_next_directions.has(turn_vector): #if possible
 			direction_current = turn_vector
 		else:
-			#print("Driver initiated turn is not possible!(yet?)")
+			print("Driver initiated turn is not possible!(yet?)")
 			return false
 	
 	#auto turn behaviour
