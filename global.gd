@@ -7,8 +7,8 @@ const MOVEMENT_BASE_SPEED = 200 #base movement speed for every object on street
 ######## ORDERS ########
 #creation
 const ORDER_MAX_UNDELIVERED = 2 #no more than x orders at once (not picked up + in inventory)
-const ORDER_COOLDOWN_MIN = 10 #wait at least x seconds before new order
-const ORDER_COOLDOWN_MAX = 30 #wait no longer than 30 seconds before creating new order
+const ORDER_COOLDOWN_MIN = 5 #wait at least x seconds before new order
+const ORDER_COOLDOWN_MAX = 15 #wait no longer than 30 seconds before creating new order
 
 #time limits / enemies spawn
 const ORDER_PUKE_THRESHOLD = 2 #spawn puke after x seconds

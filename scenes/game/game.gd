@@ -28,7 +28,7 @@ func _ready():
 
 func _process(delta):
 	#### order creation ####
-	if !timer_order_creation.paused: #cooldown elapsed?
+	if timer_order_creation.is_stopped(): #cooldown elapsed?
 		var undelivered_order_count = get_tree().get_nodes_in_group("orders").size()
 		if undelivered_order_count < g.ORDER_MAX_UNDELIVERED: #limit reached?
 			_create_order()
@@ -48,7 +48,7 @@ func _process(delta):
 
 
 func _create_order()->void:
-	assert(timer_order_creation.paused)
+	assert(timer_order_creation.is_stopped())
 	
 	var inst = Order.instance()
 	inst.connect("delivered",self,"_on_Order_delivered")
