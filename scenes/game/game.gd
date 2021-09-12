@@ -12,6 +12,7 @@ onready var lbl_speed = $VBoxContainer/LblSpeed
 
 var Order = preload("res://objects/order/Order.tscn")
 var Puke = preload("res://objects/enemy/puke/Puke.tscn")
+var Zombie = preload("res://objects/enemy/zombie/Zombie.tscn")
 
 var max_active_orders := 3
 var score := 0
@@ -34,13 +35,21 @@ func _process(delta):
 	lbl_money.text = "Money: %s$"%money
 	lbl_score.text = "Score: %s"%score
 
+
 func _create_order()->void:
 	var inst = Order.instance()
 	inst.connect("delivered",self,"_on_Order_delivered")
 	add_child(inst)
 
+
 func _create_puke(spawn_position:Vector2)->void:
 	var inst = Puke.instance()
+	inst.position = spawn_position
+	city.add_child(inst)
+
+
+func _create_zombie(spawn_position:Vector2)->void:
+	var inst = Zombie.instance()
 	inst.position = spawn_position
 	city.add_child(inst)
 
@@ -49,9 +58,10 @@ func _on_Order_delivered(order:Node, delivered_to:House, secs:float):
 	score += randi()%50 + 50 #punkte popup TODO
 	
 	#spawn enemies if too late
+	if secs > g.ORDER_ZOMBIE_THRESHOLD_START:
+		_create_zombie(delivered_to.position + delivered_to.area.position)
+	
 	if secs > g.ORDER_PUKE_THRESHOLD:
 		_create_puke(delivered_to.position + delivered_to.area.position)
-	elif secs > g.ORDER_ZOMBIE_THRESHOLD_START:
-		pass #spawn zombie
 	
 	print("OrderAbgeschlossen. Sekunden gebraucht: %s"%secs)
