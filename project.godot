@@ -63,6 +63,7 @@ singletons=[ "res://git_api.gdnlib" ]
 2d_physics/layer_2="player"
 2d_physics/layer_3="enemies"
 2d_physics/layer_4="pizzeria"
+2d_physics/layer_5="cityHouseMap"
 
 [physics]
 
