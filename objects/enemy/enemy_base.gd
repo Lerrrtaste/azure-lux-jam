@@ -1,6 +1,6 @@
 extends Node2D
 
-export(bool) var moving = false
+export(bool) var can_move = false
 
 #balancing
 var speed_base_offset = -200 #difference from global "base speed" (hardcoded in vehicle node)
@@ -23,8 +23,8 @@ func _ready():
 	#setup vehicle
 	vehicle.speed_base += speed_base_offset
 	vehicle.connect("end_reached",self,"_on_Vehicle_end_reached")
-	vehicle.connect("moving", self, "_on_Vehicle_moving")
-	if moving: 
+	#vehicle.connect("moving", self, "_on_Vehicle_moving")
+	if can_move: 
 		vehicle.start()
 	
 	#setup slowdown area

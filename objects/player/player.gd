@@ -60,9 +60,6 @@ func _unhandled_key_input(event):
 		if event.scancode == KEY_D:
 			next_turn = (Vector2(1,0)) 
 	
-	if !event.pressed:
-		[KEY_W,KEY_A,KEY_S,KEY_D].has(event.scancode)
-		next_turn = Vector2()
 	
 	if !vehicle.moving:
 		vehicle.make_turn(next_turn)

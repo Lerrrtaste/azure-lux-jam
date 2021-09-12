@@ -9,7 +9,6 @@ modulate = Color( 0.980392, 0.980392, 0.980392, 1 )
 script = ExtResource( 3 )
 
 [node name="EnemyBase" parent="." instance=ExtResource( 1 )]
-moving = true
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
