@@ -98,7 +98,7 @@ func make_turn(turn_vector:Vector2)->bool:
 		if possible_next_directions.has(turn_vector): #if possible
 			direction_current = turn_vector
 		else:
-			printerr("Driver initiated turn is not possible!")
+			print("Driver initiated turn is not possible!(yet?)")
 			return false
 	
 	#auto turn behaviour
@@ -111,12 +111,12 @@ func make_turn(turn_vector:Vector2)->bool:
 			if possible_next_directions.has(straight_turn_vec): #straight if possible
 				direction_current = straight_turn_vec
 			else: #stop if there is a choice
-				direction_current = Vector2()
+				#direction_current = Vector2()
 				return false
 	
 	moving = true
 	possible_next_directions.clear()
-	vehicle.allow_distance(cell_size.x)
+	allow_distance(24)
 	return true
 
 

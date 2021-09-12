@@ -27,7 +27,7 @@ func _process(delta):
 
 func _on_Vehicle_end_reached(possible_turns)->void:
 	if next_turn.length() > 0 && vehicle.make_turn(next_turn):
-		next_turn = Vector2() #clear next turn cache
+		pass#next_turn = Vector2() #clear next turn cache
 	else:
 		vehicle.make_turn(Vector2()) #player turn not possible, auto turn behaviour
 
@@ -47,20 +47,22 @@ func recieve_damage(damage:int)->void:
 		print("TODO game over")
 
 func _unhandled_key_input(event):
+	if event.pressed:
+		if event.scancode == KEY_W:
+			next_turn = (Vector2(0,-1)) 
+		
+		if event.scancode == KEY_A:
+			next_turn = (Vector2(-1,0)) 
+		
+		if event.scancode == KEY_S:
+			next_turn = (Vector2(0,1)) 
+		
+		if event.scancode == KEY_D:
+			next_turn = (Vector2(1,0)) 
+	
 	if !event.pressed:
-		return
-	
-	if event.scancode == KEY_W:
-		next_turn = (Vector2(0,-1))
-	
-	if event.scancode == KEY_A:
-		next_turn = (Vector2(-1,0))
-	
-	if event.scancode == KEY_S:
-		next_turn = (Vector2(0,1))
-	
-	if event.scancode == KEY_D:
-		next_turn = (Vector2(1,0))
+		[KEY_W,KEY_A,KEY_S,KEY_D].has(event.scancode)
+		next_turn = Vector2()
 	
 	if !vehicle.moving:
 		vehicle.make_turn(next_turn)
