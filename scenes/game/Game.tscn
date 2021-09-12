@@ -70,4 +70,5 @@ __meta__ = {
 [node name="Inventory" parent="." groups=[
 "Inventory",
 ] instance=ExtResource( 6 )]
-position = Vector2( 43, 409.038 )
+position = Vector2( 171.854, 441.038 )
+scale = Vector2( 2, 2 )

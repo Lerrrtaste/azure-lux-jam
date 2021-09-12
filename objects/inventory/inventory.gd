@@ -1,7 +1,7 @@
 extends Node2D
 
 var orders:Array
-var slots_unlocked := 1
+var slots_unlocked := 3
 
 onready var spr_slots = [$SprBackpack/Slot1,$SprBackpack/Slot2,$SprBackpack/Slot3]
 

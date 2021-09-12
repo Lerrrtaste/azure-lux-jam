@@ -51,7 +51,7 @@ func _ready():
 # set unset marker functions
 func setTarget():
 	if isTargetOfOrder :
-		print("waring house is already target")
+		printerr("waring house is already target")
 	else:
 		print("setting house to target")
 	marker.visible=true
@@ -61,7 +61,7 @@ func removeTarget():
 	if isTargetOfOrder :
 		print("remove the house as target")
 	else:
-		print("warning house already isnt target")
+		printerr("warning house already isnt target")
 	marker.visible=false
 	isTargetOfOrder=false
 

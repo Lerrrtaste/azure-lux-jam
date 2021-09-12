@@ -13,7 +13,7 @@ onready var lbl_speed = $VBoxContainer/LblSpeed
 var Order = preload("res://objects/order/Order.tscn")
 var Puke = preload("res://objects/enemy/puke/Puke.tscn")
 
-var max_active_orders := 2
+var max_active_orders := 3
 var score := 0
 var money := 0
 
@@ -50,7 +50,7 @@ func _on_Order_delivered(order:Node, delivered_to:House, secs:float):
 	
 	#spawn enemies if too late
 	if secs > g.ORDER_PUKE_THRESHOLD:
-		pass #spawn puke
+		_create_puke(delivered_to.position + delivered_to.area.position)
 	elif secs > g.ORDER_ZOMBIE_THRESHOLD_START:
 		pass #spawn zombie
 	
