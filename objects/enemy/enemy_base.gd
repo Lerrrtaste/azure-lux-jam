@@ -3,7 +3,7 @@ extends Node2D
 export(bool) var can_move = false
 
 #balancing
-var speed_base_offset = -200 #difference from global "base speed" (hardcoded in vehicle node)
+var speed_base_offset = 0 #difference from global "base speed" (hardcoded in vehicle node)
 var player_slowdown_percent = 0.25 #slows player down on first contact
 var damage_impact = 3 #damage on first impact
 var attack_cooldown = 0.5 #seconds between time-based attacks
