@@ -7,7 +7,6 @@
 
 [node name="EnemyBase" parent="." instance=ExtResource( 1 )]
 moving = true
-player_slowdown_percent = 0.2
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
