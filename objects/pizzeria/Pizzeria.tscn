@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://objects/pizzeria/store.png" type="Texture" id=1]
 [ext_resource path="res://objects/pizzeria/pizzeria.gd" type="Script" id=2]
+[ext_resource path="res://ui/kenney_icons2.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 36, 36 )
@@ -9,15 +10,24 @@ extents = Vector2( 36, 36 )
 [node name="Pizzeria" type="Node2D"]
 script = ExtResource( 2 )
 
-[node name="marker" type="Sprite" parent="."]
-
 [node name="store" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 
+[node name="MarkerTemplate" type="Sprite" parent="."]
+visible = false
+position = Vector2( 0, -31.4662 )
+texture = ExtResource( 3 )
+hframes = 10
+vframes = 3
+frame = 8
+
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 1 )
+
+[node name="Tween" type="Tween" parent="."]
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]

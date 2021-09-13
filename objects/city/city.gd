@@ -2,6 +2,7 @@ extends TileMap
 
 
 const House = preload("res://objects/house/house.tscn")
+const Street = preload("res://objects/city/dummy/Street.tscn")
 
 onready var pos_player_spawn = $PosPlayerSpawn
 onready var pos_pizzeria = $PosPizzeria
@@ -39,6 +40,9 @@ func _spawn_buildings()->void:
 				inst.position = map_to_world(i) + cell_size/2
 				inst.set_direction(street_direction)
 				add_child(inst)
+			"street":
+				var inst = Street.instance()
+				
 
 #required signals for driving
 func register_vehicle(vehicle:VehicleClass)->void:

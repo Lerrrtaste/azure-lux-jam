@@ -3,36 +3,38 @@ extends Node2D
 onready var tween = $Tween
 onready var label = $LblText
 
-enum Phase {
-	NONE = -1,
-	GROWING,
-	MOVING
-}
-var phase:int = Phase.NONE
+var phase:int = 0
+var inplace:bool
 
 var to:Vector2
 
 func _ready():
-	rotate(deg2rad(randi()%30-15))
+	rotation_degrees = randi()%10-5
 	tween.connect("tween_all_completed",self,"_on_Tween_all_completed")
 
 func start(text:String,from:Vector2,to:Vector2)->void:
+	inplace = (from == to)
 	label.text = text
 	position = from
-	self.to = to
-	_switch_phase(Phase.GROWING)
+	self.to = to +(Vector2(0,-24) if inplace else Vector2())
+	
+	_switch_phase(1)
 
 func _switch_phase(val:int)->void:
 	phase = val
 	match phase:
-		Phase.GROWING:
+		1:
 			var duration = 0.5
-			tween.interpolate_property(self,"position",null,Vector2(position.x+randi()%100-50,position.y-50),duration,Tween.TRANS_CIRC,Tween.EASE_OUT)
-			tween.interpolate_property(self,"modulate.a",0.0,1.0,duration,Tween.TRANS_LINEAR,2)
+			tween.interpolate_property(self,"position",null,Vector2(position.x+randi()%10-5,position.y-50),duration,Tween.TRANS_CIRC,Tween.EASE_OUT)
+			tween.interpolate_property(label,"modulate",ColorN("white",0.0),ColorN("white",1.0),duration/2,Tween.TRANS_LINEAR)
 			tween.interpolate_property(self,"scale",Vector2(0.1,0.1),Vector2(1.0,1.0),duration,Tween.TRANS_CIRC,Tween.EASE_OUT)
 			tween.start()
-		Phase.MOVING:
-			tween.interpolate_property(self,"position",null,to,0.4,Tween.TRANS_BACK,Tween.EASE_IN,0.1)
+		2:
+			if inplace:
+				#tween.interpolate_property(label,"modulate.a",1.0,0.0,0.4,Tween.TRANS_LINEAR,Tween.EASE_IN,0.1)
+				tween.interpolate_property(label,"modulate",ColorN("white",1.0),ColorN("white",0.0),0.5,Tween.TRANS_LINEAR,Tween.EASE_IN,0.5)
+			else:
+				tween.interpolate_property(self,"position",null,to,0.4,Tween.TRANS_BACK,Tween.EASE_IN,0.1)
 			tween.start()
 		_:
 			set_process(false)
