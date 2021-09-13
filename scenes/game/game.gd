@@ -17,6 +17,8 @@ var Order = preload("res://objects/order/Order.tscn")
 var Puke = preload("res://objects/enemy/puke/Puke.tscn")
 var Zombie = preload("res://objects/enemy/zombie/Zombie.tscn")
 
+var PopUp = preload("res://objects/popup/Popup.tscn") 
+
 var score := 0
 var money := 0
 var combo := 0
@@ -84,17 +86,28 @@ func _create_zombie(spawn_position:Vector2)->void:
 	inst.position = spawn_position
 	city.add_child(inst)
 
+
 func _add_money(amount:int, pos:Vector2=Vector2() )->void:
 	money += amount
 	emit_signal("money_changed",amount,money)
+	if pos != Vector2():
+		_show_popup("%s$"%amount,pos,Vector2())
 
-func _award_score(pos:Vector2, amount:int)->void:
+func _award_score(amount:int, pos:Vector2=Vector2())->void:
 	score += amount
 	emit_signal("score_added",amount,score)
+	if pos != Vector2():
+		_show_popup("%s Points"%amount,pos,Vector2())
+
+func _show_popup(text:String,from:Vector2,to:Vector2)->void:
+	var inst = PopUp.instance()
+	add_child(inst)
+	inst.start(text,from,to)
 
 func _on_Inventory_upgraded(cost:int)->void:
 	assert(cost <= money)
 	_add_money(-cost)
+
 
 func _on_TimerOrderCreation_timeout()->void:
 	_create_order()
@@ -116,19 +129,19 @@ func _on_Order_delivered(order:Node, delivered_to:House, secs:float):
 		combo = 0
 		_create_zombie(position_street)
 		_add_money(g.ORDER_REWARD_MONEY_BAD,position_house)
-		_award_score(position_street,score_reward)
+		_award_score(score_reward,position_street)
 		
 	elif secs > g.ORDER_PUKE_THRESHOLD: #order medium
 		combo = 0
 		_create_puke(position_street)
 		_add_money(g.ORDER_REWARD_MONEY_MEDIUM,position_house)
-		_award_score(position_street,score_reward)
+		_award_score(score_reward,position_street)
 		
 	else: #good order
 		score_reward += combo * g.ORDER_REWARD_POINTS_COMBO
 		score_reward += g.ORDER_REWARD_POINTS_INTIME
 		combo += 1
-		_award_score(position_street,score_reward)
+		_award_score(score_reward,position_street)
 		_add_money(g.ORDER_REWARD_MONEY_GOOD,position_house)
 		
 	
