@@ -97,7 +97,7 @@ func _award_score(amount:int, pos:Vector2=Vector2())->void:
 	score += amount
 	emit_signal("score_added",amount,score)
 	if pos != Vector2():
-		_show_popup("%s Points"%amount,pos,Vector2())
+		pass#_show_popup("+%s"%amount,pos,Vector2())
 
 func _show_popup(text:String,from:Vector2,to:Vector2)->void:
 	var inst = PopUp.instance()

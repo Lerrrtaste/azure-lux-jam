@@ -13,7 +13,7 @@ var phase:int = Phase.NONE
 var to:Vector2
 
 func _ready():
-	rotate(deg2rad(randi()%50-25))
+	rotate(deg2rad(randi()%30-15))
 	tween.connect("tween_all_completed",self,"_on_Tween_all_completed")
 
 func start(text:String,from:Vector2,to:Vector2)->void:
@@ -26,13 +26,13 @@ func _switch_phase(val:int)->void:
 	phase = val
 	match phase:
 		Phase.GROWING:
-			var duration = 0.4
+			var duration = 0.5
 			tween.interpolate_property(self,"position",null,Vector2(position.x+randi()%100-50,position.y-50),duration,Tween.TRANS_CIRC,Tween.EASE_OUT)
 			tween.interpolate_property(self,"modulate.a",0.0,1.0,duration,Tween.TRANS_LINEAR,2)
 			tween.interpolate_property(self,"scale",Vector2(0.1,0.1),Vector2(1.0,1.0),duration,Tween.TRANS_CIRC,Tween.EASE_OUT)
 			tween.start()
 		Phase.MOVING:
-			tween.interpolate_property(self,"position",null,to,0.5,Tween.TRANS_BACK,Tween.EASE_IN)
+			tween.interpolate_property(self,"position",null,to,0.4,Tween.TRANS_BACK,Tween.EASE_IN,0.1)
 			tween.start()
 		_:
 			set_process(false)
