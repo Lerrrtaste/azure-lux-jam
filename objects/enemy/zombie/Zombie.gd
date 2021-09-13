@@ -9,9 +9,11 @@ onready var rayCast2D:= $RayCast2D
 var lastPlayerPos:=Vector2(0,0)
 var following:=false
 var spawed:=false
+var strength:=-1.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	assert(strength>=0.0 && strength<=1.0 )
 	vehicle.set_speed_modifier(g.ENEMY_ZOMBIE_DEFAULT_SPEED) #set deafult spped of the zombie
 	$EnemyBase.damage_impact=g.ENEMY_ZOMBIE_DAMAGE #set damage to enemy base
 	$EnemyBase.attack_cooldown=g.ENEMY_ZOMBIE_ATTACK_COOLDOWN
