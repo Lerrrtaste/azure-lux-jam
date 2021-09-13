@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://objects/city/dummy/dummy_frames.tres" type="SpriteFrames" id=1]
+
+[node name="DummySprite" type="AnimatedSprite"]
+z_index = -100
+frames = ExtResource( 1 )
+animation = "tree"

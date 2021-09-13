@@ -1,0 +1,42 @@
+[gd_resource type="SpriteFrames" load_steps=8 format=2]
+
+[ext_resource path="res://objects/city/dummy/grass1.png" type="Texture" id=1]
+[ext_resource path="res://objects/city/dummy/tree.png" type="Texture" id=2]
+[ext_resource path="res://objects/city/dummy/grass2.png" type="Texture" id=3]
+[ext_resource path="res://objects/city/dummy/road_straight.png" type="Texture" id=4]
+[ext_resource path="res://objects/city/dummy/road_t.png" type="Texture" id=5]
+[ext_resource path="res://objects/city/dummy/road_cross.png" type="Texture" id=6]
+[ext_resource path="res://objects/city/dummy/road_corner.png" type="Texture" id=7]
+
+[resource]
+animations = [ {
+"frames": [ ExtResource( 6 ) ],
+"loop": true,
+"name": "road_cross",
+"speed": 0.0
+}, {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "road_straigt",
+"speed": 0.0
+}, {
+"frames": [ ExtResource( 1 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "grass",
+"speed": 0.0
+}, {
+"frames": [ ExtResource( 7 ) ],
+"loop": true,
+"name": "road_corner",
+"speed": 1.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "tree",
+"speed": 0.0
+}, {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "road_t",
+"speed": 0.0
+} ]

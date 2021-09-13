@@ -2,7 +2,7 @@ extends TileMap
 
 
 const House = preload("res://objects/house/house.tscn")
-const Street = preload("res://objects/city/dummy/Street.tscn")
+const Dummy = preload("res://objects/city/dummy/DummySprite.tscn")
 
 onready var pos_player_spawn = $PosPlayerSpawn
 onready var pos_pizzeria = $PosPizzeria
@@ -19,6 +19,19 @@ func _spawn_buildings()->void:
 	for i in get_used_cells():
 		var cell_id  = get_cellv(i)
 		match tile_set.tile_get_name(cell_id):
+			"empty":
+				var inst = Dummy.instance()
+				inst.play("grass")
+				inst.position = map_to_world(i)+cell_size/2
+				inst.frame = randi()%2
+				add_child(inst)
+				
+				if randi()%10 == 1:
+					var tree = Dummy.instance()
+					tree.position = map_to_world(i)+cell_size/2
+					tree.play("tree")
+					add_child(tree)
+				
 			"house":
 				var inst = House.instance()
 				
@@ -41,9 +54,45 @@ func _spawn_buildings()->void:
 				inst.set_direction(street_direction)
 				add_child(inst)
 			"street":
-				var inst = Street.instance()
+				var inst = Dummy.instance()
+				inst.position = map_to_world(i)+cell_size/2
+				add_child(inst)
+				var adjacent_roads:Array
+				var cell_id_street := tile_set.find_tile_by_name("street")
+				if get_cellv(i+Vector2(0,-1)) == cell_id_street:
+					adjacent_roads.append(Vector2(0,-1))
+				if get_cellv(i+Vector2(0,1)) == cell_id_street:
+					adjacent_roads.append(Vector2(0,1))
+				if get_cellv(i+Vector2(-1,0)) == cell_id_street:
+					adjacent_roads.append(Vector2(-1,0))
+				if get_cellv(i+Vector2(1,0)) == cell_id_street:
+					adjacent_roads.append(Vector2(1,0))
 				
-
+				#determin road type
+				match adjacent_roads.size():
+					1: # no sackgassen
+						assert(false)
+					2: #straigt or corner
+						var combined = adjacent_roads[0]+adjacent_roads[1]
+						if (combined.x != 0 && combined.y != 0): #orner
+							inst.play("road_corner")
+							if adjacent_roads.has(Vector2(1,0)):
+								inst.flip_h = true
+							if adjacent_roads.has(Vector2(0,-1)):
+								inst.flip_v = true
+						else: #straigt
+							inst.play("road_straigt")
+							inst.rotation_degrees = 90 * int(adjacent_roads.has(Vector2(0,1)))
+					3: #T
+						inst.play("road_t")
+						if adjacent_roads.has(Vector2(0,-1)):
+							inst.rotation_degrees += 90
+							if adjacent_roads.has(Vector2(1,0)):
+								inst.rotation_degrees += 90
+								if adjacent_roads.has(Vector2(0,1)):
+									inst.rotation_degrees += 90
+					4:
+						inst.play("road_cross")
 #required signals for driving
 func register_vehicle(vehicle:VehicleClass)->void:
 	vehicle.connect("update_possible_directions",self,"_on_Vehicle_update_possible_directions")
