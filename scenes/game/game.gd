@@ -83,6 +83,7 @@ func _create_puke(spawn_position:Vector2)->void:
 
 func _create_zombie(spawn_position:Vector2)->void:
 	var inst = Zombie.instance()
+	inst.strength = 0.0
 	inst.position = spawn_position
 	city.add_child(inst)
 

@@ -91,7 +91,7 @@ func make_turn(turn_vector:Vector2)->bool:
 		return false
 	
 	#remove backwards driving
-	assert(!possible_next_directions.has(direction_current*-1))
+	#assert(!possible_next_directions.has(direction_current*-1))
 #	if possible_next_directions.has(direction_current*-1):
 #		possible_next_directions.erase(direction_current*-1)
 	
@@ -119,6 +119,10 @@ func make_turn(turn_vector:Vector2)->bool:
 	possible_next_directions.clear()
 	allow_distance(24)
 	return true
+
+func turn_around()->void:
+	possible_next_directions.append(direction_current * -1)
+	make_turn(direction_current * -1)
 
 
 #called by self after request_new_target
