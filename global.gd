@@ -1,7 +1,7 @@
 extends Node
 
 ######## GENERAL ########
-const MOVEMENT_BASE_SPEED = 200 #base movement speed for every object on street
+const MOVEMENT_BASE_SPEED = 25 #base movement speed for every object on street
 
 
 ######## ORDERS ########

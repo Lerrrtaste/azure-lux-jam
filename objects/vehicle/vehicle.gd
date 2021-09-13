@@ -91,16 +91,16 @@ func make_turn(turn_vector:Vector2)->bool:
 		return false
 	
 	#remove backwards driving
-	if possible_next_directions.has(direction_current*-1):
-		possible_next_directions.erase(direction_current*-1)
+	assert(!possible_next_directions.has(direction_current*-1))
+#	if possible_next_directions.has(direction_current*-1):
+#		possible_next_directions.erase(direction_current*-1)
 	
 	#apply driver input
 	if turn_vector.length() == 1:
 		if possible_next_directions.has(turn_vector): #if possible
 			direction_current = turn_vector
 		else:
-			print("Driver initiated turn is not possible!(yet?)")
-			return false
+			turn_vector = Vector2() #fallback to auto turn behaviour
 	
 	#auto turn behaviour
 	if turn_vector == Vector2():
@@ -131,6 +131,7 @@ func set_speed_modifier(val:float)->void:
 	speed_modifier = max(0.1,min(1.0,val)) 
 
 func set_possible_directions(arr:Array)->void:
+	arr.erase(direction_current*-1)
 	possible_next_directions = arr
 	emit_signal("end_reached",arr)
 	
