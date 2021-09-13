@@ -39,15 +39,18 @@ func _process(delta):
 			
 			# good pizza
 			if orders[i].seconds_passed <= g.ORDER_PUKE_THRESHOLD:
-				frame = 3
+				frame = 2
+				spr_slots[i].get_node("Pizza").texture = load("res://objects/inventory/pizza%s.png"%1)
 			
 			#medium pizza
 			if orders[i].seconds_passed > g.ORDER_PUKE_THRESHOLD:
-				frame = 4 
+				frame = 2
+				spr_slots[i].get_node("Pizza").texture = load("res://objects/inventory/pizza%s.png"%3)
 			
 			#bad pizza
 			if orders[i].seconds_passed > g.ORDER_ZOMBIE_THRESHOLD_START:
-				frame = 5 
+				frame = 2
+				spr_slots[i].get_node("Pizza").texture = load("res://objects/inventory/pizza%s.png"%5)
 			
 		spr_slots[i].frame = frame
 
