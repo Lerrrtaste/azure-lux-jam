@@ -6,9 +6,9 @@ const MOVEMENT_BASE_SPEED = 200 #base movement speed for every object on street
 
 ######## ORDERS ########
 #creation
-const ORDER_MAX_UNDELIVERED = 2 #no more than x orders at once (not picked up + in inventory)
-const ORDER_COOLDOWN_MIN = 5 #wait at least x seconds before new order
-const ORDER_COOLDOWN_MAX = 15 #wait no longer than 30 seconds before creating new order
+const ORDER_MAX_UNDELIVERED = 6 #no more than x orders at once (not picked up + in inventory)
+const ORDER_COOLDOWN_MIN = 1 #wait at least x seconds before new order
+const ORDER_COOLDOWN_MAX = 4 #wait no longer than 30 seconds before creating new order
 
 #time limits / enemies spawn
 const ORDER_PUKE_THRESHOLD = 2 #spawn puke after x seconds
@@ -30,7 +30,7 @@ const ORDER_REWARD_MONEY_RANDOM = 5 #between 0 and x money extra (variation)
 ######## INVENTORY ########
 const INVENTORY_COST_SLOT_2 = 50
 const INVENTORY_COST_SLOT_3 = 150
-
+const INVENTORY_SLOTS_MAX = 5
 
 ######## ENEMIES ########
 #puke

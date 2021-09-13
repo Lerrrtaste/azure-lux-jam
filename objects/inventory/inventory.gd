@@ -1,17 +1,28 @@
 extends Node2D
 
 var orders:Array
-var slots_unlocked := 1
+var slots_unlocked := 4
+var upgrade_available := false
 
-onready var spr_slots = [$SprBackpack/Slot1,$SprBackpack/Slot2,$SprBackpack/Slot3]
+onready var spr_slot_template = $SprBackpack/SlotTemplate
+onready var spr_backpack = $SprBackpack
 
+var spr_slots:Array
+
+signal upgrade()
 
 func _ready():
-	pass
+	for i in range(g.INVENTORY_SLOTS_MAX):
+		var inst = spr_slot_template.duplicate()
+		inst.offset.y = i*(inst.texture.get_height()/inst.vframes)
+		spr_backpack.add_child(inst)
+		spr_slots.append(inst)
+	spr_slot_template.visible = false
+	spr_slot_template.queue_free()
 
 
 func _process(delta):
-	for i in range(3):
+	for i in range(g.INVENTORY_SLOTS_MAX):
 		#filled with pizza
 		if orders.size() > i:
 			var frame:int
@@ -29,13 +40,13 @@ func _process(delta):
 				frame = 3 
 			
 			spr_slots[i].frame = frame
-			spr_slots[i].visible = true
 		elif slots_unlocked <= i:#locked
 			spr_slots[i].frame = 0 
-			spr_slots[i].visible = true
 		else: #unlocked but empty yeet
-			spr_slots[i].visible = false
+			spr_slots[i].frame = 4
 
+func _on_Game_slot_purchased()->void:
+	slots_unlocked += 1
 
 func order_add(order:Node)->bool:
 	#is there enough space?
