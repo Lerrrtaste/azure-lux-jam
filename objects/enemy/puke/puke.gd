@@ -15,7 +15,13 @@ func _ready():
 	strm.set_loop(false)
 	$AudioStreamPlayer.play()
 
+func _process(delta):
+	update()
+	
 func _on_TimerDespawn_timeout()->void:
 	visible = false
 	set_process(false)
 	queue_free()
+
+func _draw():
+	draw_circle(Vector2(),10,ColorN("red"))

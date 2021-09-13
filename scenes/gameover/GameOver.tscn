@@ -1,14 +1,21 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://ui/raw_fonts/Kenney Thick.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://scenes/gameover/gamover.gd" type="Script" id=2]
+[ext_resource path="res://ui/raw_fonts/Kenney Future Narrow.ttf" type="DynamicFontData" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
 font_data = ExtResource( 1 )
 
+[sub_resource type="DynamicFont" id=2]
+size = 256
+font_data = ExtResource( 3 )
+
 [node name="GameOver" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -23,3 +30,13 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Button" type="Button" parent="."]
+margin_left = 160.319
+margin_top = 320.638
+margin_right = 1045.32
+margin_bottom = 614.638
+custom_fonts/font = SubResource( 2 )
+text = "Retry"
+
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

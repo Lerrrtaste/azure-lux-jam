@@ -1,12 +1,13 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/splash_screen/JamBackground.jpg" type="Texture" id=1]
 [ext_resource path="res://scenes/splash_screen/splash_screen.gd" type="Script" id=2]
 [ext_resource path="res://scenes/splash_screen/JamLogo.png" type="Texture" id=3]
+[ext_resource path="res://ui/raw_fonts/Kenney Future Narrow.ttf" type="DynamicFontData" id=4]
 
 [sub_resource type="Animation" id=1]
 resource_name = "SplashAnimation"
-length = 5.0
+length = 3.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimationPlayer/Background:position")
 tracks/0/interp = 1
@@ -14,8 +15,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 5 ),
-"transitions": PoolRealArray( 0.267943, 1 ),
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 0.594603, 0.366021 ),
 "update": 0,
 "values": [ Vector2( 0, 0 ), Vector2( -1500, 0 ) ]
 }
@@ -26,11 +27,27 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 5 ),
-"transitions": PoolRealArray( 0.233258, 1 ),
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 0.554784, 0.267943 ),
 "update": 0,
-"values": [ Vector2( 1.5, 1.5 ), Vector2( 1.1, 1.1 ) ]
+"values": [ Vector2( 2, 2 ), Vector2( 1.1, 1.1 ) ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("AnimationPlayer/JamLogo:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1.8, 3 ),
+"transitions": PoolRealArray( 1.6245, 0.450626, 2.46229 ),
+"update": 0,
+"values": [ Vector2( 671.09, 504.771 ), Vector2( 502.9, 259.161 ), Vector2( 609.688, 235.133 ) ]
+}
+
+[sub_resource type="DynamicFont" id=2]
+size = 32
+font_data = ExtResource( 4 )
 
 [node name="SplashScreen" type="Node2D"]
 script = ExtResource( 2 )
@@ -39,19 +56,20 @@ script = ExtResource( 2 )
 anims/SplashAnimation = SubResource( 1 )
 
 [node name="Background" type="Sprite" parent="AnimationPlayer"]
-scale = Vector2( 1.5, 1.5 )
+position = Vector2( -1500, 0 )
+scale = Vector2( 1.1, 1.1 )
 texture = ExtResource( 1 )
 centered = false
 
 [node name="LblMadeIn" type="Label" parent="AnimationPlayer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 340.0
-margin_top = 160.0
-margin_right = -340.0
-margin_bottom = -160.0
-text = "[FONT FEHLT NOCH]
-Made in only 72h
+margin_left = 211.855
+margin_top = -96.2891
+margin_right = -268.145
+margin_bottom = -416.289
+custom_fonts/font = SubResource( 2 )
+text = "Made in only 72h
 for
 "
 align = 1
@@ -61,8 +79,22 @@ __meta__ = {
 }
 
 [node name="JamLogo" type="Sprite" parent="AnimationPlayer"]
-position = Vector2( 671.09, 504.771 )
+position = Vector2( 609.688, 235.133 )
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 3 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 3186, 1400 )
+
+[node name="AcceptDialog" type="AcceptDialog" parent="."]
+margin_right = 83.0
+margin_bottom = 58.0
+popup_exclusive = true
+window_title = "Alert!!11!!1eleven!!"
+dialog_text = "Hi, thanks for playing our game :) 
+Sadly we ran out of time at the end of the Jam, so many things are not there yet or unfinished :/
+Check the description below for Controls, a \"how to play\" and the Story"
+dialog_hide_on_ok = false
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="confirmed" from="AcceptDialog" to="." method="_on_AcceptDialog_confirmed"]
+[connection signal="popup_hide" from="AcceptDialog" to="." method="_on_AcceptDialog_popup_hide"]

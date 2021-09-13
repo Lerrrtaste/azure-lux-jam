@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://objects/city/City.tscn" type="PackedScene" id=1]
 [ext_resource path="res://objects/player/Player.tscn" type="PackedScene" id=2]
@@ -6,10 +6,13 @@
 [ext_resource path="res://ui/raw_fonts/Kenney Future Narrow.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://scenes/game/puke_screeneffect_placeholder.png" type="Texture" id=5]
 [ext_resource path="res://objects/inventory/Inventory.tscn" type="PackedScene" id=6]
-[ext_resource path="res://scenes/game/backgruond_music_cyba_-_yellow.mp3" type="AudioStream" id=7]
+[ext_resource path="res://scenes/game/bgmusic.mp3" type="AudioStream" id=7]
 
 [sub_resource type="DynamicFont" id=1]
 size = 20
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=2]
 font_data = ExtResource( 4 )
 
 [node name="Game" type="Node2D"]
@@ -37,9 +40,12 @@ __meta__ = {
 }
 
 [node name="LblSpeed" type="Label" parent="VBoxContainer"]
-margin_right = 73.0
+margin_right = 124.0
 margin_bottom = 23.0
 custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 5
 text = "Speed"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -47,9 +53,12 @@ __meta__ = {
 
 [node name="LblHp" type="Label" parent="VBoxContainer"]
 margin_top = 27.0
-margin_right = 73.0
+margin_right = 124.0
 margin_bottom = 50.0
 custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 5
 text = "Hp"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -57,9 +66,12 @@ __meta__ = {
 
 [node name="LblScore" type="Label" parent="VBoxContainer"]
 margin_top = 54.0
-margin_right = 73.0
+margin_right = 124.0
 margin_bottom = 77.0
 custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 5
 text = "Score"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -67,10 +79,27 @@ __meta__ = {
 
 [node name="LblMoney" type="Label" parent="VBoxContainer"]
 margin_top = 81.0
-margin_right = 73.0
+margin_right = 124.0
 margin_bottom = 104.0
 custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 5
 text = "Money"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LblInventory" type="Label" parent="VBoxContainer"]
+margin_top = 108.0
+margin_right = 124.0
+margin_bottom = 157.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 5
+text = "
+Inventory:"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -78,7 +107,7 @@ __meta__ = {
 [node name="Inventory" parent="." groups=[
 "Inventory",
 ] instance=ExtResource( 6 )]
-position = Vector2( 0, 128 )
+position = Vector2( 0, 197.433 )
 
 [node name="TimerOrderCreation" type="Timer" parent="."]
 one_shot = true
@@ -93,5 +122,17 @@ centered = false
 stream = ExtResource( 7 )
 volume_db = -11.333
 autoplay = true
+
+[node name="Label" type="Label" parent="."]
+margin_top = 658.225
+margin_right = 831.0
+margin_bottom = 718.225
+custom_fonts/font = SubResource( 2 )
+text = "Hi, thanks for playing our game :) 
+Sadly we ran out of time at the end of the Jam, so many things are not there yet / finished :/
+Check the description below for Controls, a \"how to play\" and the Story"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [editable path="City"]

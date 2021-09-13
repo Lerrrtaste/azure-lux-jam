@@ -59,7 +59,7 @@ func _process(delta):
 	#### update ui text ####
 	lbl_speed.text = "Speed: %s km/h"%(player.vehicle.speed_base * player.vehicle.speed_modifier)
 	lbl_hp.text = "HP: %s"%player.hp
-	lbl_money.text = "Money: %s Pizza Bucks"%money
+	lbl_money.text = "Money: %s $"%money
 	lbl_score.text = "Score: %s"%score
 	#lbl_combo.text = "Combo: %sx"%combo
 
@@ -73,7 +73,7 @@ func _create_order()->void:
 	
 	assert(g.ORDER_COOLDOWN_MAX>=g.ORDER_COOLDOWN_MIN)
 	var undelivered_order_count = get_tree().get_nodes_in_group("orders").size()
-	timer_order_creation.start(undelivered_order_count*(randi()%((g.ORDER_COOLDOWN_MAX-g.ORDER_COOLDOWN_MIN))+g.ORDER_COOLDOWN_MIN)) #start cooldown
+	timer_order_creation.start(((undelivered_order_count*0.2)+0.1)*(randi()%((g.ORDER_COOLDOWN_MAX-g.ORDER_COOLDOWN_MIN))+g.ORDER_COOLDOWN_MIN)) #start cooldown
 	print("New order in ", timer_order_creation.time_left)
 	
 	_show_popup("New Order",city.pizzeria.position,city.pizzeria.position)

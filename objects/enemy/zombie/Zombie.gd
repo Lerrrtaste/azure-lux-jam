@@ -14,8 +14,9 @@ var spawed:=false
 var timeout:float
 var strength:=-1.0
 var frontPlayer:bool
+var anim_counter := 0.0
 
-
+# Called when the node enters the scene tree for the first time.
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	assert(strength>=0.0 && strength<=1.0 )
@@ -42,21 +43,23 @@ func _draw():
 	
 	
 func _process(delta):
-		var collider
-		if rayCastFront.is_colliding() and rayCastFront.get_collider().get_parent().is_in_group("Players") :
-			collider=rayCastFront.get_collider().get_parent()
-			frontPlayer=true
-		elif rayCastBack.is_colliding() and rayCastBack.get_collider().get_parent().is_in_group("Players") :
-			collider=rayCastBack.get_collider().get_parent()
-			frontPlayer=false
-		else :
-			timeout+=delta	#after 10 seconds stop trying to catch up with the player
-			if(timeout>g.ENEMY_ZOMBIE_FOLLOWING_TIMEOUT) :
-				following=false
-			return
-		lastPlayerPos=collider.get_global_position()
-		following=true
-		timeout=0
+	$Sprite.rotation = vehicle.direction_current.angle()
+	#$Sprite.rotation_degrees += 90
+	var collider
+	if rayCastFront.is_colliding() and rayCastFront.get_collider().get_parent().is_in_group("Players") :
+		collider=rayCastFront.get_collider().get_parent()
+		frontPlayer=true
+	elif rayCastBack.is_colliding() and rayCastBack.get_collider().get_parent().is_in_group("Players") :
+		collider=rayCastBack.get_collider().get_parent()
+		frontPlayer=false
+	else :
+		timeout+=delta	#after 10 seconds stop trying to catch up with the player
+		if(timeout>g.ENEMY_ZOMBIE_FOLLOWING_TIMEOUT) :
+			following=false
+		return
+	lastPlayerPos=collider.get_global_position()
+	following=true
+	timeout=0
 
 
 
@@ -97,7 +100,11 @@ func _on_Vehicle_end_reached(A:Array):
 			following=false
 		
 func _on_Vehicle_moving(movement):
-	  position = position + movement
+	position = position + movement
+	anim_counter += movement.length()
+	if anim_counter > 6:
+		anim_counter = 0.0
+		$Sprite.frame = 1 - $Sprite.frame
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

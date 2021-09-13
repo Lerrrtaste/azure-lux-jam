@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/cash-register-sound-effect.mp3-2fcf95853aa57122dcd6e4fd73b11a22.mp3str"
+
+[deps]
+
+source_file="res://objects/house/cash-register-sound-effect.mp3"
+dest_files=[ "res://.import/cash-register-sound-effect.mp3-2fcf95853aa57122dcd6e4fd73b11a22.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
