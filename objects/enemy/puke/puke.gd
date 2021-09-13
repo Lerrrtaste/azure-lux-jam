@@ -11,6 +11,9 @@ func _ready():
 	
 	timer_despawn.connect("timeout",self,"_on_TimerDespawn_timeout")
 	timer_despawn.start(g.ENEMY_PUKE_LIFETIME)
+	var strm = $AudioStreamPlayer.stream as AudioStreamMP3
+	strm.set_loop(false)
+	$AudioStreamPlayer.play()
 
 func _on_TimerDespawn_timeout()->void:
 	visible = false

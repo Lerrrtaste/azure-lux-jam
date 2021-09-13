@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/while-driving.mp3-43135d5522f4ba7ba844194f13c2aa3d.mp3str"
+
+[deps]
+
+source_file="res://objects/player/while-driving.mp3"
+dest_files=[ "res://.import/while-driving.mp3-43135d5522f4ba7ba844194f13c2aa3d.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
