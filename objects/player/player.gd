@@ -24,9 +24,10 @@ func _process(delta):
 	
 	#### handel input ####
 
-	if vehicle.moving and !$AudioStreamPlayer.playing :
+	if vehicle.moving and !$AudioStreamPlayer.playing:
 		$AudioStreamPlayer.play()
-	if !vehicle.moving and  $AudioStreamPlayer.playing:
+	
+	if !vehicle.moving and $AudioStreamPlayer.playing:
 		$AudioStreamPlayer.stop()
 
 	$Sprite.rotation = vehicle.direction_current.angle()
