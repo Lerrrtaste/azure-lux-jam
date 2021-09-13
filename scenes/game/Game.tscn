@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://objects/city/City.tscn" type="PackedScene" id=1]
 [ext_resource path="res://objects/player/Player.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://ui/raw_fonts/Kenney Future Narrow.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://scenes/game/puke_screeneffect_placeholder.png" type="Texture" id=5]
 [ext_resource path="res://objects/inventory/Inventory.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/game/backgruond_music_cyba_-_yellow.mp3" type="AudioStream" id=7]
 
 [sub_resource type="DynamicFont" id=1]
 size = 20
@@ -86,5 +87,10 @@ position = Vector2( 0, -720 )
 scale = Vector2( 10, 10 )
 texture = ExtResource( 5 )
 centered = false
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+volume_db = -11.333
+autoplay = true
 
 [editable path="City"]

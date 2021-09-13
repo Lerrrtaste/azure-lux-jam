@@ -22,7 +22,7 @@ func _ready():
 	#make zombie capable according to its strengh
 	enemyBase.damage_impact=int(strength*3*g.ENEMY_ZOMBIE_DAMAGE)
 	enemyBase.attack_damage=int(strength*3*g.ENEMY_ZOMBIE_DAMAGE)
-	enemyBase.player_slowdown_percent=strength/2
+	enemyBase.player_slowdown_percent=strength/5
 	enemyBase.attack_cooldown=1/(strength*2)
 	enemyBase.attack_range=int(strength*36)
 	enemyBase.slowdown_range=int(strength*96)

@@ -35,6 +35,8 @@ func _ready():
 
 
 func _process(delta):
+	if !$AudioStreamPlayer.playing :
+		$AudioStreamPlayer.play()
 	#game over condition
 	if player.hp <= 0:
 		get_tree().change_scene("res://scenes/gameover/GameOver.tscn")
