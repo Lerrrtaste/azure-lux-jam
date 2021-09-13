@@ -14,9 +14,14 @@ can_move = true
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 
-[node name="RayCast2D" type="RayCast2D" parent="."]
-position = Vector2( 0, 24 )
+[node name="RayCastFront" type="RayCast2D" parent="."]
 enabled = true
-cast_to = Vector2( 0, 1 )
+cast_to = Vector2( 0, -600 )
+collision_mask = 18
+collide_with_areas = true
+
+[node name="RayCastBack" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 0, -600 )
 collision_mask = 18
 collide_with_areas = true
