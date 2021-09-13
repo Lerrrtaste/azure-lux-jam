@@ -55,6 +55,7 @@ func _process(delta):
 func _buy_upgrade()->void:
 	assert(upgrade_available)
 	emit_signal("upgraded",get_upgrade_cost())
+	upgrade_available = false
 	slots_unlocked += 1
 
 
@@ -76,7 +77,7 @@ func _on_Game_money_changed(delta:int,total:int)->void:
 	if slots_unlocked >= g.INVENTORY_SLOTS_MAX:
 		return
 	
-	upgrade_available = total >= get_upgrade_cost()
+	upgrade_available = (total >= get_upgrade_cost())
 
 
 func _on_Order_delivered(order:Node,house:Node,delivery_time_secs:float)->void:

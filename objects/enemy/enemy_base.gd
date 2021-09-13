@@ -4,10 +4,10 @@ export(bool) var can_move = false
 
 #balancing
 var speed_base_offset = 0 #difference from global "base speed" (hardcoded in vehicle node)
-var player_slowdown_percent = 0.25 #slows player down on first contact
-var damage_impact = 3 #damage on first impact
-var attack_cooldown = 0.5 #seconds between time-based attacks
-var attack_damage = 1 #damage from time based attacks
+var player_slowdown_percent = 0.0 #slows player down on first contact
+var damage_impact = 0 #damage on first impact
+var attack_cooldown = 0.0 #seconds between time-based attacks
+var attack_damage = 0 #damage from time based attacks
 var attack_range := 12 #radius for attacking
 var slowdown_range := 6 #radius for slowdown 
 var body_radius := 6 #radius for taking damage
@@ -40,7 +40,6 @@ func _on_AreaSlowdown_area_entered(area:Area2D)->void:
 	var obj = area.owner
 	if obj.has_method("recieve_slowdown"):
 		obj.recieve_slowdown(player_slowdown_percent)
-		
 
 func _on_AreaAttack_area_entered(area:Area2D)->void:
 	var obj = area.owner

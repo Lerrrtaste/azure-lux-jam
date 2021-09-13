@@ -25,6 +25,7 @@ signal money_changed(delta,total)
 signal score_added(added,total)
 
 func _ready():
+	randomize()
 	player.position = city._get_player_spawn()
 	timer_order_creation.connect("timeout",self,"_on_TimerOrderCreation_timeout")
 	connect("money_changed",inventory,"_on_Game_money_changed")
@@ -32,10 +33,17 @@ func _ready():
 
 
 func _process(delta):
+	#game over condition
+	if player.hp <= 0:
+		get_tree().change_scene("res://scenes/gameover/GameOver.tscn")
+	
 	#### order creation ####
-	if timer_order_creation.is_stopped(): #cooldown elapsed?
-		var undelivered_order_count = get_tree().get_nodes_in_group("orders").size()
-		if undelivered_order_count < g.ORDER_MAX_UNDELIVERED: #limit reached?
+	var undelivered_order_count = get_tree().get_nodes_in_group("orders").size()
+	if  (undelivered_order_count == 0 && (timer_order_creation.time_left<g.ORDER_COOLDOWN_MIN)): # skip if no order
+		timer_order_creation.stop()
+	
+	if timer_order_creation.is_stopped(): #cooldown elapsed? 
+		if undelivered_order_count < g.ORDER_MAX_QUEUED+inventory.slots_unlocked: #limit reached?
 			_create_order()
 	
 	
@@ -61,9 +69,11 @@ func _create_order()->void:
 	
 	assert(g.ORDER_COOLDOWN_MAX>=g.ORDER_COOLDOWN_MIN)
 	timer_order_creation.start((randi()%(g.ORDER_COOLDOWN_MAX-g.ORDER_COOLDOWN_MIN))+g.ORDER_COOLDOWN_MIN) #start cooldown
+	print("New order in ", timer_order_creation.time_left)
 
 
 func _create_puke(spawn_position:Vector2)->void:
+	yield(get_tree().create_timer(.25),"timeout") #TODO puke spawn anim
 	var inst = Puke.instance()
 	inst.position = spawn_position
 	city.add_child(inst)
@@ -81,7 +91,6 @@ func _add_money(amount:int, pos:Vector2=Vector2() )->void:
 func _award_score(pos:Vector2, amount:int)->void:
 	score += amount
 	emit_signal("score_added",amount,score)
-
 
 func _on_Inventory_upgraded(cost:int)->void:
 	assert(cost <= money)
