@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/splash-kotze.mp3-5aa7c90bf04bebeefbccce3aeab31d18.mp3str"
+
+[deps]
+
+source_file="res://objects/enemy/puke/splash-kotze.mp3"
+dest_files=[ "res://.import/splash-kotze.mp3-5aa7c90bf04bebeefbccce3aeab31d18.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

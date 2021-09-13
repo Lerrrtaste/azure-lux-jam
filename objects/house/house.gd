@@ -75,6 +75,9 @@ func removeTarget():
 		print("remove the house as target")
 	else:
 		printerr("warning house already isnt target")
+	var strm = $AudioStreamPlayer.stream as AudioStreamMP3
+	strm.set_loop(false)
+	$AudioStreamPlayer.play()
 	marker.visible=false
 	isTargetOfOrder=false
 

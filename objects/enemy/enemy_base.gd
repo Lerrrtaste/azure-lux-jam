@@ -38,6 +38,9 @@ func _ready():
 
 func _on_AreaSlowdown_area_entered(area:Area2D)->void:
 	var obj = area.owner
+	var strm = $AudioStreamPlayer.stream as AudioStreamMP3
+	strm.set_loop(false)
+	$AudioStreamPlayer.play()
 	if obj.has_method("recieve_slowdown"):
 		obj.recieve_slowdown(player_slowdown_percent)
 

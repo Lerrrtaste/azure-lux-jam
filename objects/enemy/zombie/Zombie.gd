@@ -32,6 +32,9 @@ func _ready():
 	$EnemyBase.attack_cooldown=g.ENEMY_ZOMBIE_ATTACK_COOLDOWN
 	vehicle.connect("end_reached",self,"_on_Vehicle_end_reached")
 	vehicle.connect("moving", self, "_on_Vehicle_moving")
+	var strm = $AudioStreamPlayer.stream as AudioStreamMP3
+	strm.set_loop(false)
+	$AudioStreamPlayer.play()
 
 func _draw():
 	if following : #draw the circle according to the following status
