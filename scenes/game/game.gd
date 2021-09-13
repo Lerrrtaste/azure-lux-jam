@@ -81,9 +81,9 @@ func _create_puke(spawn_position:Vector2)->void:
 	city.add_child(inst)
 
 
-func _create_zombie(spawn_position:Vector2)->void:
+func _create_zombie(spawn_position:Vector2,strength:float)->void:
 	var inst = Zombie.instance()
-	inst.strength = 0.0
+	inst.strength = g.ORDER_ZOMBIE_THRESHOLD_START
 	inst.position = spawn_position
 	city.add_child(inst)
 
@@ -128,7 +128,7 @@ func _on_Order_delivered(order:Node, delivered_to:House, secs:float):
 	#issue rewards based on delivery thresholds
 	if secs > g.ORDER_ZOMBIE_THRESHOLD_START: #order bad
 		combo = 0
-		_create_zombie(position_street)
+		_create_zombie(position_street,clamp(secs - g.ORDER_ZOMBIE_THRESHOLD_START / g.ORDER_ZOMBIE_THRESHOLD_END,0.0,1.0))
 		_add_money(g.ORDER_REWARD_MONEY_BAD,position_house)
 		_award_score(score_reward,position_street)
 		
