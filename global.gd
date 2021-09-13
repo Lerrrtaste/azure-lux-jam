@@ -1,7 +1,7 @@
 extends Node
 
 ######## GENERAL ########
-const MOVEMENT_BASE_SPEED = 25 #base movement speed for every object on street
+const MOVEMENT_BASE_SPEED = 200 #base movement speed for every object on street
 
 
 ######## ORDERS ########
@@ -28,8 +28,8 @@ const ORDER_REWARD_MONEY_BAD = 0 # money for bad pizza
 const ORDER_REWARD_MONEY_RANDOM = 5 #between 0 and x money extra (variation)
 
 ######## INVENTORY ########
-const INVENTORY_COST_SLOT_2 = 50
-const INVENTORY_COST_SLOT_3 = 150
+const INVENTORY_UPGRADE_COST_BASE = 3 #upgrade base cost
+const INVENTORY_UPGRADE_COST_INCREASE = 3 #ignored on first upgrade, added twice on seconds upgrade etc
 const INVENTORY_SLOTS_MAX = 5
 
 ######## ENEMIES ########

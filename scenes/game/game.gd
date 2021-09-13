@@ -21,9 +21,14 @@ var score := 0
 var money := 0
 var combo := 0
 
+signal money_changed(delta,total)
+signal score_added(added,total)
+
 func _ready():
 	player.position = city._get_player_spawn()
 	timer_order_creation.connect("timeout",self,"_on_TimerOrderCreation_timeout")
+	connect("money_changed",inventory,"_on_Game_money_changed")
+	inventory.connect("upgraded",self,"_on_Inventory_upgraded")
 
 
 func _process(delta):
@@ -69,11 +74,18 @@ func _create_zombie(spawn_position:Vector2)->void:
 	inst.position = spawn_position
 	city.add_child(inst)
 
-func _award_money(pos:Vector2, amount:int)->void:
+func _add_money(amount:int, pos:Vector2=Vector2() )->void:
 	money += amount
+	emit_signal("money_changed",amount,money)
 
 func _award_score(pos:Vector2, amount:int)->void:
 	score += amount
+	emit_signal("score_added",amount,score)
+
+
+func _on_Inventory_upgraded(cost:int)->void:
+	assert(cost <= money)
+	_add_money(-cost)
 
 func _on_TimerOrderCreation_timeout()->void:
 	_create_order()
@@ -87,26 +99,28 @@ func _on_Order_delivered(order:Node, delivered_to:House, secs:float):
 	score_reward += g.ORDER_REWARD_POINTS_DELIVERED
 	score_reward += randi()%g.ORDER_REWARD_POINTS_RANDOM
 	
-	var money_bonus := randi()%g.ORDER_REWARD_MONEY_RANDOM
+	var money_bonus := 0
+	money_bonus +=randi()%g.ORDER_REWARD_MONEY_RANDOM
 	
+	#issue rewards based on delivery thresholds
 	if secs > g.ORDER_ZOMBIE_THRESHOLD_START: #order bad
 		combo = 0
-		
 		_create_zombie(position_street)
-		_award_money(position_house,g.ORDER_REWARD_MONEY_BAD)
+		_add_money(g.ORDER_REWARD_MONEY_BAD,position_house)
 		_award_score(position_street,score_reward)
+		
 	elif secs > g.ORDER_PUKE_THRESHOLD: #order medium
 		combo = 0
-		
 		_create_puke(position_street)
-		_award_money(position_house,g.ORDER_REWARD_MONEY_MEDIUM)
+		_add_money(g.ORDER_REWARD_MONEY_MEDIUM,position_house)
 		_award_score(position_street,score_reward)
+		
 	else: #good order
 		score_reward += combo * g.ORDER_REWARD_POINTS_COMBO
 		score_reward += g.ORDER_REWARD_POINTS_INTIME
 		combo += 1
 		_award_score(position_street,score_reward)
-		_award_money(position_house,g.ORDER_REWARD_MONEY_GOOD)
+		_add_money(g.ORDER_REWARD_MONEY_GOOD,position_house)
 		
 	
 	#order good

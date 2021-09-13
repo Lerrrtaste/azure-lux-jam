@@ -9,6 +9,8 @@ script = ExtResource( 1 )
 [node name="SprBackpack" type="Sprite" parent="."]
 
 [node name="SlotTemplate" type="Sprite" parent="SprBackpack"]
+position = Vector2( 32, 32 )
 texture = ExtResource( 3 )
 hframes = 2
 vframes = 3
+frame = 5
