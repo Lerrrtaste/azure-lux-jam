@@ -1,7 +1,6 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://objects/inventory/inventory.gd" type="Script" id=1]
-[ext_resource path="res://objects/inventory/pizza1.png" type="Texture" id=2]
 [ext_resource path="res://objects/inventory/backpack_slot_placeholder.png" type="Texture" id=3]
 
 [node name="Inventory" type="Node2D"]
@@ -19,5 +18,4 @@ frame = 5
 [node name="Pizza" type="Sprite" parent="SprBackpack/SlotTemplate"]
 position = Vector2( -22.7502, -21.4888 )
 scale = Vector2( 2, 2 )
-texture = ExtResource( 2 )
 centered = false

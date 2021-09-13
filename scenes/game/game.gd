@@ -72,7 +72,8 @@ func _create_order()->void:
 	add_child(inst)
 	
 	assert(g.ORDER_COOLDOWN_MAX>=g.ORDER_COOLDOWN_MIN)
-	timer_order_creation.start((randi()%(g.ORDER_COOLDOWN_MAX-g.ORDER_COOLDOWN_MIN))+g.ORDER_COOLDOWN_MIN) #start cooldown
+	var undelivered_order_count = get_tree().get_nodes_in_group("orders").size()
+	timer_order_creation.start(undelivered_order_count*(randi()%((g.ORDER_COOLDOWN_MAX-g.ORDER_COOLDOWN_MIN))+g.ORDER_COOLDOWN_MIN)) #start cooldown
 	print("New order in ", timer_order_creation.time_left)
 	
 	_show_popup("New Order",city.pizzeria.position,city.pizzeria.position)
@@ -99,10 +100,11 @@ func _add_money(amount:int, pos:Vector2=Vector2() )->void:
 		_show_popup("%s$"%amount,pos+city.cell_size/2,Vector2())
 
 func _award_score(amount:int, pos:Vector2=Vector2())->void:
+	yield(get_tree().create_timer(0.2),"timeout")
 	score += amount
 	emit_signal("score_added",amount,score)
 	if pos != Vector2():
-		pass#_show_popup("+%s"%amount,pos,Vector2())
+		_show_popup("%s Points"%amount,player.position,Vector2())
 
 func _show_popup(text:String,from:Vector2,to:Vector2)->void:
 	var inst = PopUp.instance()

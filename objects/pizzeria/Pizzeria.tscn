@@ -6,7 +6,7 @@
 [ext_resource path="res://objects/pizzeria/alert-pizza.mp3" type="AudioStream" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 36, 36 )
+extents = Vector2( 36, 24 )
 
 [node name="Pizzeria" type="Node2D"]
 script = ExtResource( 2 )

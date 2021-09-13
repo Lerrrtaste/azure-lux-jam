@@ -22,8 +22,6 @@ func notifyNewPizza():
 	strm.set_loop(false)
 	$AudioStreamPlayer.play()
 	
-
-	
 	
 	var inst = marker_template.duplicate()
 	inst.visible=true
