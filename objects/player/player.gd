@@ -65,7 +65,7 @@ func _on_Vehicle_end_reached(possible_turns)->void:
 		return
 	
 	#go straight then
-	vehicle.make_turn(turn_nonstraight*turn_combined)
+	vehicle.make_turn(Vector2())
 #	if possible_turns.has(turn_y):
 #		vehicle.make_turn(turn_y)
 #		return
