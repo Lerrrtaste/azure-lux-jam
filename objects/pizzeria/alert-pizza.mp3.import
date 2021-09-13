@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/alert-pizza.mp3-d3de7e98cfc8edda75629dae92ab14e3.mp3str"
+
+[deps]
+
+source_file="res://objects/pizzeria/alert-pizza.mp3"
+dest_files=[ "res://.import/alert-pizza.mp3-d3de7e98cfc8edda75629dae92ab14e3.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

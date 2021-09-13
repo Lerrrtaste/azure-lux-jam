@@ -18,6 +18,12 @@ func _ready():
 
 func notifyNewPizza():
 	pizzas_ready+=1
+	var strm = $AudioStreamPlayer.stream as AudioStreamMP3
+	strm.set_loop(false)
+	$AudioStreamPlayer.play()
+	
+
+	
 	
 	var inst = marker_template.duplicate()
 	inst.visible=true
@@ -40,5 +46,7 @@ func _process(delta):
 
 func _on_Area2D_area_entered(area):
 	emit_signal("player_picking_up")
+
+
 
 
