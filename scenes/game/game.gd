@@ -29,7 +29,7 @@ signal score_added(added,total)
 func _ready():
 	randomize()
 	player.position = city._get_player_spawn()
-	timer_order_creation.connect("timeout",self,"_on_TimerOrderCreation_timeout")
+	#timer_order_creation.connect("timeout",self,"_on_TimerOrderCreation_timeout")
 	connect("money_changed",inventory,"_on_Game_money_changed")
 	inventory.connect("upgraded",self,"_on_Inventory_upgraded")
 
@@ -72,6 +72,8 @@ func _create_order()->void:
 	assert(g.ORDER_COOLDOWN_MAX>=g.ORDER_COOLDOWN_MIN)
 	timer_order_creation.start((randi()%(g.ORDER_COOLDOWN_MAX-g.ORDER_COOLDOWN_MIN))+g.ORDER_COOLDOWN_MIN) #start cooldown
 	print("New order in ", timer_order_creation.time_left)
+	
+	_show_popup("New Order",city.pizzeria.position,city.pizzeria.position)
 
 
 func _create_puke(spawn_position:Vector2)->void:
@@ -81,9 +83,9 @@ func _create_puke(spawn_position:Vector2)->void:
 	city.add_child(inst)
 
 
-func _create_zombie(spawn_position:Vector2)->void:
+func _create_zombie(spawn_position:Vector2,strength:float)->void:
 	var inst = Zombie.instance()
-	inst.strength = 0.0
+	inst.strength = strength
 	inst.position = spawn_position
 	city.add_child(inst)
 
@@ -92,7 +94,7 @@ func _add_money(amount:int, pos:Vector2=Vector2() )->void:
 	money += amount
 	emit_signal("money_changed",amount,money)
 	if pos != Vector2():
-		_show_popup("%s$"%amount,pos,Vector2())
+		_show_popup("%s$"%amount,pos+city.cell_size/2,Vector2())
 
 func _award_score(amount:int, pos:Vector2=Vector2())->void:
 	score += amount
@@ -102,16 +104,16 @@ func _award_score(amount:int, pos:Vector2=Vector2())->void:
 
 func _show_popup(text:String,from:Vector2,to:Vector2)->void:
 	var inst = PopUp.instance()
-	add_child(inst)
+	city.add_child(inst)
 	inst.start(text,from,to)
 
 func _on_Inventory_upgraded(cost:int)->void:
 	assert(cost <= money)
 	_add_money(-cost)
 
-
-func _on_TimerOrderCreation_timeout()->void:
-	_create_order()
+#
+#func _on_TimerOrderCreation_timeout()->void:
+#	_create_order()
 
 
 func _on_Order_delivered(order:Node, delivered_to:House, secs:float):
@@ -128,7 +130,9 @@ func _on_Order_delivered(order:Node, delivered_to:House, secs:float):
 	#issue rewards based on delivery thresholds
 	if secs > g.ORDER_ZOMBIE_THRESHOLD_START: #order bad
 		combo = 0
-		_create_zombie(position_street)
+		var strength = clamp((secs - g.ORDER_ZOMBIE_THRESHOLD_START) / (g.ORDER_ZOMBIE_THRESHOLD_END-g.ORDER_ZOMBIE_THRESHOLD_START),0.0,1.0)
+		print("zombie strength: ",strength)
+		_create_zombie(position_street,strength)
 		_add_money(g.ORDER_REWARD_MONEY_BAD,position_house)
 		_award_score(score_reward,position_street)
 		
