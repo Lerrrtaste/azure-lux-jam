@@ -9,11 +9,12 @@ onready var pos_pizzeria = $PosPizzeria
 onready var pizzeria = $Pizzeria
 
 func _ready():
+	self_modulate = ColorN("white",0)
 	_spawn_buildings()
 
 func _spawn_buildings()->void:
 	#pizzeria
-	pizzeria.position = map_to_world(world_to_map(pos_pizzeria.position))+cell_size
+	pizzeria.position = map_to_world(world_to_map(pos_pizzeria.position)) + Vector2(24,11)
 	
 	#houses
 	for i in get_used_cells():

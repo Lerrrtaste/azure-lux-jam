@@ -9,7 +9,7 @@ onready var lbl_hp = $VBoxContainer/LblHp
 onready var lbl_score = $VBoxContainer/LblScore
 onready var lbl_money = $VBoxContainer/LblMoney
 onready var lbl_speed = $VBoxContainer/LblSpeed
-onready var lbl_combo = $VBoxContainer/LblCombo
+#onready var lbl_combo = $VBoxContainer/LblCombo
 
 onready var timer_order_creation = $TimerOrderCreation
 
@@ -50,8 +50,8 @@ func _process(delta):
 	
 	
 	#### update puke screen effect ####
-	#spr_puke_effect.modulate = ColorN("white",(1.2-player.vehicle.speed_modifier)) #TODO change
-	#spr_puke_effect.position.y = -360 + 720*(1.0-player.vehicle.speed_modifier)
+	spr_puke_effect.modulate.a = 1.2-player.vehicle.speed_modifier
+	spr_puke_effect.position.y = -720*(player.vehicle.speed_modifier)
 	
 	
 	#### update ui text ####
@@ -59,7 +59,7 @@ func _process(delta):
 	lbl_hp.text = "HP: %s"%player.hp
 	lbl_money.text = "Money: %s Pizza Bucks"%money
 	lbl_score.text = "Score: %s"%score
-	lbl_combo.text = "Combo: %sx"%combo
+	#lbl_combo.text = "Combo: %sx"%combo
 
 
 func _create_order()->void:
@@ -129,7 +129,7 @@ func _on_Order_delivered(order:Node, delivered_to:House, secs:float):
 	
 	#issue rewards based on delivery thresholds
 	if secs > g.ORDER_ZOMBIE_THRESHOLD_START: #order bad
-		combo = 0
+		#combo = 0
 		var strength = clamp((secs - g.ORDER_ZOMBIE_THRESHOLD_START) / (g.ORDER_ZOMBIE_THRESHOLD_END-g.ORDER_ZOMBIE_THRESHOLD_START),0.0,1.0)
 		print("zombie strength: ",strength)
 		_create_zombie(position_street,strength)
@@ -137,15 +137,15 @@ func _on_Order_delivered(order:Node, delivered_to:House, secs:float):
 		_award_score(score_reward,position_street)
 		
 	elif secs > g.ORDER_PUKE_THRESHOLD: #order medium
-		combo = 0
+		#combo = 0
 		_create_puke(position_street)
 		_add_money(g.ORDER_REWARD_MONEY_MEDIUM,position_house)
 		_award_score(score_reward,position_street)
 		
 	else: #good order
-		score_reward += combo * g.ORDER_REWARD_POINTS_COMBO
+		#score_reward += combo * g.ORDER_REWARD_POINTS_COMBO
 		score_reward += g.ORDER_REWARD_POINTS_INTIME
-		combo += 1
+		#combo += 1
 		_award_score(score_reward,position_street)
 		_add_money(g.ORDER_REWARD_MONEY_GOOD,position_house)
 		
