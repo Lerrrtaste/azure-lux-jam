@@ -5,6 +5,7 @@ var  visionRange:=g.ENEMY_ZOMBIE_VISION_RANGE
 # var a = 2
 # var b = "text"
 onready var vehicle:= $EnemyBase/Vehicle
+onready var enemyBase:=$EnemyBase
 onready var rayCastFront:= $RayCastFront
 onready var rayCastBack:= $RayCastBack
 var lastPlayerPos:=Vector2(0,0)
@@ -18,6 +19,14 @@ var frontPlayer:bool
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	assert(strength>=0.0 && strength<=1.0 )
+	#make zombie capable according to its strengh
+	enemyBase.damage_impact=int(strength*3*g.ENEMY_ZOMBIE_DAMAGE)
+	enemyBase.attack_damage=int(strength*3*g.ENEMY_ZOMBIE_DAMAGE)
+	enemyBase.player_slowdown_percent=strength/2
+	enemyBase.attack_cooldown=1/(strength*2)
+	enemyBase.attack_range=int(strength*36)
+	enemyBase.slowdown_range=int(strength*96)
+	enemyBase.body_radius=int(4/strength)
 	vehicle.set_speed_modifier(g.ENEMY_ZOMBIE_DEFAULT_SPEED) #set deafult spped of the zombie
 	$EnemyBase.damage_impact=g.ENEMY_ZOMBIE_DAMAGE #set damage to enemy base
 	$EnemyBase.attack_cooldown=g.ENEMY_ZOMBIE_ATTACK_COOLDOWN
