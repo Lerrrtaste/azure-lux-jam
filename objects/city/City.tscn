@@ -7,7 +7,6 @@
 [node name="City" type="TileMap" groups=[
 "City",
 ]]
-self_modulate = Color( 1, 1, 1, 0 )
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 24, 24 )
 collision_layer = 16

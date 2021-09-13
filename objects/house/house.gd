@@ -26,22 +26,35 @@ export(directions) var direction_collision: int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$main.texture = load("res://objects/house/house%s.png"%(randi()%2+1))
+	
 	marker.visible=false
 	#set position according to editor position
 
 	match direction_collision :
 		directions.LEFT:
 			area.position.x=-24
-			icon.rotate(0)
+			#icon.rotate(0)
+			icon.set_flip_h(true)
+			$decoration.set_flip_h(true)
+			#$decoration.rotate(0)
+			$decoration.texture = load("res://objects/house/door_side%s.png"%(randi()%4+1))
 		directions.RIGHT:
 			area.position.x=24
-			icon.set_flip_h(true)
+			icon.set_flip_h(false)
+			$decoration.set_flip_h(false)
+			$decoration.texture = load("res://objects/house/door_side%s.png"%(randi()%4+1))
 		directions.UP:
-			icon.rotate(1.5708)
+			#icon.rotate(1.5708)
 			area.position.y=-24
+			#$decoration.rotate(1.5708)
+			#$decoration.texture = load("res://objects/house/house%s.png"%(randi()%2+1))
 		directions.DOWN:
 			area.position.y=24
-			icon.rotate(-1.5708)
+			#icon.rotate(-1.5708)
+			#$decoration.rotate(-1.5708)
+			
+			$decoration.texture = load("res://objects/house/door_front%s.png"%(randi()%3+1))
 
 
 
