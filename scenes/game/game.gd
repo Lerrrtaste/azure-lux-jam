@@ -59,7 +59,7 @@ func _process(delta):
 	#### update ui text ####
 	lbl_speed.text = "Speed: %s km/h"%(player.vehicle.speed_base * player.vehicle.speed_modifier)
 	lbl_hp.text = "HP: %s"%player.hp
-	lbl_money.text = "Money: %s $"%money
+	lbl_money.text = "Money: %s $ (%s next upgrade)"%[money,inventory.get_upgrade_cost()]
 	lbl_score.text = "Score: %s"%score
 	#lbl_combo.text = "Combo: %sx"%combo
 
@@ -96,8 +96,15 @@ func _create_zombie(spawn_position:Vector2,strength:float)->void:
 func _add_money(amount:int, pos:Vector2=Vector2() )->void:
 	money += amount
 	emit_signal("money_changed",amount,money)
+	
 	if pos != Vector2():
 		_show_popup("%s$"%amount,pos+city.cell_size/2,Vector2())
+		
+	yield(get_tree().create_timer(0.4),"timeout")
+	if(money >= inventory.get_upgrade_cost()):
+		var inst = PopUp.instance()
+		city.add_child(inst)
+		inst.start("Upgrade available!",player.position,player.position)
 
 func _award_score(amount:int, pos:Vector2=Vector2())->void:
 	yield(get_tree().create_timer(0.2),"timeout")
@@ -113,6 +120,9 @@ func _show_popup(text:String,from:Vector2,to:Vector2)->void:
 
 func _on_Inventory_upgraded(cost:int)->void:
 	assert(cost <= money)
+	var inst = PopUp.instance()
+	city.add_child(inst)
+	inst.start("Inventory upgraded!",player.position,player.position)
 	_add_money(-cost)
 
 #

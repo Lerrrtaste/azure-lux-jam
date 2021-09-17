@@ -91,7 +91,7 @@ margin_bottom = 58.0
 popup_exclusive = true
 window_title = "Alert!!11!!1eleven!!"
 dialog_text = "Hi, thanks for playing our game :) 
-Sadly we ran out of time at the end of the Jam, so many things are not there yet or unfinished :/
+Sadly we ran out of time at the end of the Jam, so some mechanics are still missing.
 Check the description below for Controls, a \"how to play\" and the Story"
 dialog_hide_on_ok = false
 
